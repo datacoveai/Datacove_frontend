@@ -1,0 +1,184 @@
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam:wght@400;500;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-[#060B27] text-white font-sans;
+}
+
+.border-bottom {
+  border-bottom: 0.5px solid #727374; /* Tailwind's gray-300 color */
+}
+
+/* Navbar */
+.navbar {
+  @apply flex justify-between items-center px-8 py-4 bg-midnightBlue shadow-lg;
+}
+.navbar a {
+  @apply text-white hover:text-purple transition-all;
+}
+.navbar button {
+  @apply px-4 py-2 rounded-lg bg-purple text-white hover:bg-purpleLight shadow-button transition-all;
+}
+
+/* Hero Section */
+.hero {
+  @apply flex flex-col items-center text-center pt-16 pb-20 bg-gradient-to-b from-gradientStart to-gradientEnd;
+}
+.hero h1 {
+  @apply text-4xl md:text-5xl font-bold mb-4;
+}
+.hero p {
+  @apply text-grayLight max-w-3xl mb-6;
+}
+.hero button {
+  @apply px-6 py-3 rounded-xl bg-purple text-white hover:bg-purpleLight shadow-button transition-all;
+}
+
+/* Features Section */
+.features {
+  @apply py-20 px-8 bg-darkBlue;
+}
+.features h2 {
+  @apply text-3xl font-bold text-center mb-12;
+}
+.features .feature-card {
+  @apply bg-midnightBlue p-6 rounded-xl shadow-card hover:shadow-lg transition-shadow;
+}
+.features .feature-card h3 {
+  @apply text-xl font-semibold mb-4;
+}
+.features .feature-card p {
+  @apply text-grayLight;
+}
+
+/* Testimonials Section */
+.testimonials {
+  @apply py-20 px-8 bg-gradient-to-b from-gradientStart to-gradientEnd;
+}
+.testimonials h2 {
+  @apply text-3xl font-bold text-center mb-12;
+}
+.testimonials .testimonial-card {
+  @apply bg-midnightBlue p-6 rounded-xl shadow-card hover:shadow-lg transition-shadow;
+}
+.testimonials .testimonial-card p {
+  @apply text-grayLight italic mb-4;
+}
+.testimonials .testimonial-card h3 {
+  @apply text-lg font-semibold;
+}
+
+/* CTA Section */
+.cta {
+  @apply py-20 px-8 text-center bg-purple rounded-xl shadow-lg;
+}
+.cta h2 {
+  @apply text-4xl font-bold text-white mb-4;
+}
+.cta button {
+  @apply px-8 py-3 rounded-xl bg-white text-purple font-semibold hover:bg-gray-200 transition-all;
+}
+
+/* News Section */
+.news {
+  @apply py-20 px-8 bg-darkBlue;
+}
+.news h2 {
+  @apply text-3xl font-bold text-center mb-12;
+}
+.news .news-card {
+  @apply bg-midnightBlue p-6 rounded-xl shadow-card hover:shadow-lg transition-shadow;
+}
+.news .news-card h3 {
+  @apply text-xl font-semibold mb-2;
+}
+.news .news-card p {
+  @apply text-grayLight;
+}
+.news .news-card a {
+  @apply text-purple hover:text-purpleLight font-semibold transition-all;
+}
+
+/* Footer */
+.footer {
+  @apply py-12 px-8 bg-midnightBlue;
+}
+.footer .footer-links {
+  @apply flex flex-wrap justify-between mb-8;
+}
+.footer .footer-links a {
+  @apply text-grayLight hover:text-purple transition-all;
+}
+.footer .newsletter {
+  @apply flex flex-col md:flex-row items-center bg-darkBlue p-6 rounded-xl shadow-card;
+}
+.footer .newsletter input {
+  @apply flex-1 px-4 py-2 rounded-lg bg-midnightBlue text-white border border-gray-600;
+}
+.footer .newsletter button {
+  @apply px-6 py-2 ml-4 rounded-lg bg-purple text-white hover:bg-purpleLight transition-all;
+}
+.footer p {
+  @apply text-center text-grayLight mt-4;
+}
+
+.home-container {
+  padding-left: 20%;
+  padding-right: 20%;
+}
+.no-padding {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.feature-padding {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.feature-padding_two {
+  padding-left: 3%;
+  padding-right: 3%;
+}
+
+.gradient-border {
+  position: relative; /* Uncomment if needed for specific layout */
+  border: 2px solid transparent;
+  border-image-source: linear-gradient(
+    130.38deg,
+    #ffffff 57.86%,
+    rgba(152, 255, 206, 0.68) 74.98%,
+    #3771c8 89.11%,
+    #7e69ff 100.67%
+  );
+  border-image-slice: 1;
+  border-radius: 1rem;
+  background-clip: padding-box;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 1300px) {
+  .home-container {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .home-container {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
+@media screen and (max-width: 800px) {
+  .home-container {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
+
+* {
+  margin: 0;
+}
