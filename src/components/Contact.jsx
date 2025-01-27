@@ -44,7 +44,7 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="flex justify-center items-center align-middle gap-3">
+            <div className="flex justify-center items-center align-middle gap-3 mt-10 md:mt-0">
               <img src={insta} alt="" />
               <img src={x} alt="" />
               <img src={link} alt="" className="h-10 w-10" />

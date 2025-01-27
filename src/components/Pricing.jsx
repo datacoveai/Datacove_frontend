@@ -36,7 +36,7 @@ const Pricing = () => {
           </div>
         </div>
       </div>
-      <div className="flex gap-[1rem] max-lg:flex-wrap mt-8 justify-center  mb-8  align-middle">
+      <div className="flex gap-[1rem] max-lg:flex-wrap mt-8 justify-center mb-8 align-middle">
         {Data.map((item) => (
           <div
             key={item.id}
@@ -53,6 +53,7 @@ const Pricing = () => {
                   "linear-gradient(195.05deg, rgba(163, 43, 255, 0.8) 0%, rgba(167, 43, 255, 0.4) 50%, rgba(153, 43, 255, 0.06) 100%)",
                 borderImageSlice: 1,
                 borderRadius: "1rem",
+                overflow: "hidden",
               }}
             ></div>
             <div>
@@ -114,13 +115,13 @@ const Pricing = () => {
           </div>
         ))}
       </div>
-      <div className=" home-container flex justify-center items-center mb-24">
+      <div className="flex justify-center items-center mb-24">
         <div className="mt-12 md:mt-24 flex flex-col justify-center items-center w-full md:w-[80%]">
           <div
             style={{
               backgroundImage: `url(${shape})`,
             }}
-            className="bg-cover bg-center h-40 sm:h-56 md:h-64 w-[40%] lg:w-full rounded-md relative"
+            className="bg-cover bg-center h-40 sm:h-56 md:h-64 w-[80%] lg:w-full rounded-md relative"
           >
             <div
               style={{

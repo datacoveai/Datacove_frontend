@@ -24,318 +24,313 @@ import service5 from "../assets/service_5.png";
 import export_1 from "../assets/export.png";
 import eclipse3 from "../assets/elipse3.png";
 import elipse4 from "../assets/elipse4.png";
-
 import Footer from "../Footer/Footer";
+import CountUp from "react-countup";
+
+const images = [
+  { src: kaspersky, alt: "Kaspersky" },
+  { src: disney, alt: "Disney" },
+  { src: McAfee, alt: "McAfee" },
+  { src: britbox, alt: "Britbox" },
+  { src: comodo, alt: "Comodo" },
+];
+
 const MoreFeatures = () => {
   return (
     <div className="mt-32  ">
       {/* Hero */}
-      <div className=" home-container flex gap-8 justify-between">
+      <div className="home-container flex flex-col-reverse lg:flex-row gap-8 justify-between items-center px-4">
         <img
           src={hero}
           alt=""
-          className="absolute top-0 left-0 w-full h-auto -z-40"
+          className="absolute top-0 left-0 w-full h-[70%] z-40 object-cover"
         />
-        <div className="flex justify-center  flex-col w-[50%]  ">
-          <h1 className="font-[700] text-2xl sm:text-3xl md:text-4xl lg:text-[40px] p-4   bg-gradient-to-b from-[#F6F6F7] to-[#7E808F] bg-clip-text text-transparent">
+        <div className="flex flex-col justify-center items-center lg:items-start w-full lg:w-[50%] text-center lg:text-left">
+          <h1 className="font-[700] text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[40px] p-4 bg-gradient-to-b from-[#F6F6F7] to-[#7E808F] bg-clip-text text-transparent">
             Prioritize high-value <br />
             tasks with streamlined <br />
             contract review
           </h1>
-          <p className="text-[#8F9BB7] text-[14px] font-[400] w-[100%] p-4">
+          <p className="text-[#8F9BB7] text-sm sm:text-base font-[400] w-full lg:w-[90%] p-4">
             Attract new business and deliver enhanced client value with Kira’s
             machine learning technology, enabling rapid and efficient contract
             review and analysis
           </p>
-          <div className="p-4 w-[30%]">
-            {" "}
-            <button className="bg-[#7214FF] pl-4 pr-4 pt-3 pb-3 rounded-2xl text-[12px] w-full ">
+          <div className="p-4 w-full sm:w-[50%] md:w-[40%] lg:w-[30%] mx-auto lg:mx-0">
+            <button className="bg-[#7214FF] pl-4 pr-4 pt-3 pb-3 rounded-2xl text-sm sm:text-[14px] w-full">
               Get a demo
             </button>
           </div>
         </div>
-        <div className="flex justify-end align-middle items-center w-[50%] ">
-          <img src={feature} alt="" className="w-[30rem] h-[25rem]" />
+        <div className="flex justify-center lg:justify-end items-center w-full lg:w-[50%]">
+          <img
+            src={feature}
+            alt=""
+            className="w-[20rem] h-[15rem] sm:w-[25rem] sm:h-[20rem] lg:w-[30rem] lg:h-[25rem]"
+          />
         </div>
       </div>
+
       {/* Collab */}
-      <div className="flex justify-between items-center gap-3 left-0 top-0 feature-padding mb-36 mt-36">
-        <div className="flex justify-center items-center p-2 h-24 w-24 ">
-          <img src={kaspersky} alt="" className="h-32 w-32 object-contain" />
-        </div>
-        <div className="flex justify-center items-center p-2 h-24 w-24 ">
-          <img src={disney} alt="" className="h-32 w-32 object-contain" />
-        </div>
-        <div className="flex justify-center items-center p-2 h-24 w-24 ">
-          <img src={McAfee} alt="" className="h-32 w-32 object-contain" />
-        </div>
-        <div className="flex justify-center items-center p-2 h-24 w-24 ">
-          <img src={britbox} alt="" className="h-32 w-32 object-contain" />
-        </div>
-        <div className="flex justify-center items-center p-2 h-24 w-24 ">
-          <img src={comodo} alt="" className="h-32 w-32 object-contain" />
-        </div>
+      <div className="flex overflow-hidden feature-padding m-10">
+        <ul className="flex animate-infinite-scroll gap-20">
+          {[...images, ...images].map((image, index) => (
+            <li key={index} className="flex p-2 h-24 w-24">
+              <img
+                src={image.src}
+                alt={image.alt}
+                className="h-32 w-32 object-contain"
+              />
+            </li>
+          ))}
+        </ul>
       </div>
+
       {/* AI's Potential */}
-      <div className="feature-padding_two flex gap-6 justify-center  align-middle mb-6 mt-[10rem] ">
+      <div className="feature-padding_two flex flex-col lg:flex-row gap-6 justify-center items-center mb-6 mt-[10rem] px-4 lg:px-16">
         <div className="p-4">
-          <img src={feature_img} alt="" />
+          <img src={feature_img} alt="Feature" className="max-w-full h-auto" />
         </div>
         <div
-          className=" flex flex-col items-center bg-cover bg-center "
+          className="flex flex-col items-center bg-cover bg-center w-full lg:w-[50%] py-6"
           style={{
             backgroundImage: `url(${heading})`,
-            // borderRadius: "50%",
-            top: 0,
-            backgroundSize: "contain", // Can also use 'contain' or custom values like '100px 100px'
-            backgroundPosition: "top", // Position the image
-            backgroundRepeat: "no-repeat", // Prevents repetition
+            backgroundSize: "contain",
+            backgroundPosition: "top",
+            backgroundRepeat: "no-repeat",
           }}
         >
-          <div className="flex flex-col justify-center items-center mt-6">
-            {" "}
-            <div className="flex justify-center items-center align-middle w-[80%] mb-6 z-50  ">
-              <h2 className="font-[700] text-2xl sm:text-3xl md:text-4xl lg:text-[40px] h-24   bg-gradient-to-b from-[#F6F6F7] to-[#7E808F] bg-clip-text text-transparent">
-                Unleashing AIs Potential in your Documents
-              </h2>
-            </div>
-            <div className="flex gap-4 justify-center align-middle p-4 w-[80%] h-auto">
-              <div className="flex flex-col gap-8 justify-between ">
-                <div className="flex gap-6">
-                  <div className="flex justify-center ">
-                    <img src={feature_1} alt="" className="h-8 w-10 mt-2" />
-                  </div>
-                  <div className="flex flex-col ">
-                    <h2 className="text-[19px] font-beVietnam font-[600]">
-                      Business Growth
-                    </h2>
-                    <p className="text-[13px] text-[#8F9BB7] w-[80%]">
-                      Sed perspiciatis unde omnis natus error voluptatem
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-6">
-                  <div className="flex justify-center ">
-                    <img src={feature_3} alt="" className="h-8 w-10 mt-2" />
-                  </div>
-                  <div className="flex flex-col ">
-                    <h2 className="text-[19px] font-beVietnam font-[600]">
-                      Business Growth
-                    </h2>
-                    <p className="text-[13px] text-[#8F9BB7] w-[80%]">
-                      Sed perspiciatis unde omnis natus error voluptatem
-                    </p>
-                  </div>
+          <div className="flex justify-center items-center text-center w-full lg:w-[80%] mb-6 z-50">
+            <h2 className="font-[700] text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[40px] h-auto bg-gradient-to-b from-[#F6F6F7] to-[#7E808F] bg-clip-text text-transparent">
+              Unleashing AI’s Potential in Your Documents
+            </h2>
+          </div>
+          <div className="flex flex-wrap gap-6 justify-center items-start w-full lg:w-[80%] px-4">
+            <div className="flex flex-col gap-8 w-full md:w-[45%]">
+              <div className="flex gap-4 items-start">
+                <img src={feature_1} alt="Feature 1" className="h-10 w-10" />
+                <div>
+                  <h2 className="text-base sm:text-lg font-beVietnam font-[600]">
+                    Business Growth
+                  </h2>
+                  <p className="text-sm sm:text-base text-[#8F9BB7]">
+                    Sed perspiciatis unde omnis natus error voluptatem
+                  </p>
                 </div>
               </div>
-              <div className="flex flex-col gap-8 justify-between ">
-                <div className="flex gap-6">
-                  <div className="flex justify-center ">
-                    <img src={feature_2} alt="" className="h-8 w-10 mt-2" />
-                  </div>
-                  <div className="flex flex-col ">
-                    <h2 className="text-[19px] font-beVietnam font-[600]">
-                      Business Growth
-                    </h2>
-                    <p className="text-[13px] text-[#8F9BB7] w-[80%]">
-                      Sed perspiciatis unde omnis natus error voluptatem
-                    </p>
-                  </div>
+              <div className="flex gap-4 items-start">
+                <img src={feature_3} alt="Feature 3" className="h-10 w-10" />
+                <div>
+                  <h2 className="text-base sm:text-lg font-beVietnam font-[600]">
+                    Business Growth
+                  </h2>
+                  <p className="text-sm sm:text-base text-[#8F9BB7]">
+                    Sed perspiciatis unde omnis natus error voluptatem
+                  </p>
                 </div>
-                <div className="flex gap-6">
-                  <div className="flex justify-center ">
-                    <img src={feature_4} alt="" className="h-8 w-10 mt-2" />
-                  </div>
-                  <div className="flex flex-col ">
-                    <h2 className="text-[19px] font-beVietnam font-[600]">
-                      Business Growth
-                    </h2>
-                    <p className="text-[13px] text-[#8F9BB7] w-[80%]">
-                      Sed perspiciatis unde omnis natus error voluptatem
-                    </p>
-                  </div>
+              </div>
+            </div>
+            <div className="flex flex-col gap-8 w-full md:w-[45%]">
+              <div className="flex gap-4 items-start">
+                <img src={feature_2} alt="Feature 2" className="h-10 w-10" />
+                <div>
+                  <h2 className="text-base sm:text-lg font-beVietnam font-[600]">
+                    Business Growth
+                  </h2>
+                  <p className="text-sm sm:text-base text-[#8F9BB7]">
+                    Sed perspiciatis unde omnis natus error voluptatem
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-4 items-start">
+                <img src={feature_4} alt="Feature 4" className="h-10 w-10" />
+                <div>
+                  <h2 className="text-base sm:text-lg font-beVietnam font-[600]">
+                    Business Growth
+                  </h2>
+                  <p className="text-sm sm:text-base text-[#8F9BB7]">
+                    Sed perspiciatis unde omnis natus error voluptatem
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
       {/* Numbers */}
-      <div className="bg-[#150C46] h-44 flex justify-center mt-[10rem] ">
-        <div className="pl-40 pr-40 flex gap-4 justify-between h-full w-[90%]">
-          <div className=" flex flex-col justify-center items-center align-middle gap-3 ">
-            <h2 className="text-[36px] font-[400] text-[#FFFFFF]">400+</h2>
-            <p className="text-[18px] text-[#9C9C9C] font-[400]">
+      <div className="bg-[#150C46] py-10 flex justify-center mt-14">
+        <div className="flex flex-wrap justify-between gap-6 w-[90%] max-w-7xl">
+          {/* Project Completed */}
+          <div className="flex flex-col justify-center items-center gap-3 w-full sm:w-auto">
+            <h2 className="text-[28px] sm:text-[36px] font-[400] text-[#FFFFFF]">
+              <CountUp end={400} duration={3} separator="," />+
+            </h2>
+            <p className="text-[16px] sm:text-[18px] text-[#9C9C9C] font-[400] text-center">
               Projects Completed
             </p>
           </div>
-          <div className="justify-center items-center align-middle flex">
-            <div className="border-[1px] h-[35%] border-[#FFFFFF] border-opacity-30 "></div>
+
+          {/* Divider */}
+          <div className="hidden sm:flex justify-center items-center">
+            <div className="border-[1px] h-[80%] border-[#FFFFFF] border-opacity-30"></div>
           </div>
 
-          <div className=" flex flex-col justify-center items-center align-middle gap-3 ">
-            <h2 className="text-[36px] font-[400] text-[#FFFFFF]">15+</h2>
-            <p className="text-[18px] text-[#9C9C9C] font-[400]">
+          {/* Successful Years */}
+          <div className="flex flex-col justify-center items-center gap-3 w-full sm:w-auto">
+            <h2 className="text-[28px] sm:text-[36px] font-[400] text-[#FFFFFF]">
+              <CountUp end={15} duration={3} />+
+            </h2>
+            <p className="text-[16px] sm:text-[18px] text-[#9C9C9C] font-[400] text-center">
               Successful Years
             </p>
           </div>
-          <div className="justify-center items-center align-middle flex">
-            <div className="border-[1px] h-[35%] border-[#FFFFFF] border-opacity-30 "></div>
+
+          {/* Divider */}
+          <div className="hidden sm:flex justify-center items-center">
+            <div className="border-[1px] h-[80%] border-[#FFFFFF] border-opacity-30"></div>
           </div>
-          <div className=" flex flex-col justify-center items-center align-middle gap-3 ">
-            <h2 className="text-[36px] font-[400] text-[#FFFFFF]">98%</h2>
-            <p className="text-[18px] text-[#9C9C9C] font-[400]">
+
+          {/* Client Retention */}
+          <div className="flex flex-col justify-center items-center gap-3 w-full sm:w-auto">
+            <h2 className="text-[28px] sm:text-[36px] font-[400] text-[#FFFFFF]">
+              <CountUp end={98} duration={3} />%
+            </h2>
+            <p className="text-[16px] sm:text-[18px] text-[#9C9C9C] font-[400] text-center">
               Client Retention
             </p>
           </div>
-          <div className="justify-center items-center align-middle flex">
-            <div className="border-[1px] h-[35%] border-[#FFFFFF] border-opacity-30 "></div>
+
+          {/* Divider */}
+          <div className="hidden sm:flex justify-center items-center">
+            <div className="border-[1px] h-[80%] border-[#FFFFFF] border-opacity-30"></div>
           </div>
-          <div className=" flex flex-col justify-center items-center align-middle ">
-            <h2 className="text-[36px] font-[400] text-[#FFFFFF]">30+</h2>
-            <p className="text-[18px] text-[#9C9C9C] font-[400]">Countries</p>
+
+          {/* Countries */}
+          <div className="flex flex-col justify-center items-center gap-3 w-full sm:w-auto">
+            <h2 className="text-[28px] sm:text-[36px] font-[400] text-[#FFFFFF]">
+              <CountUp end={30} duration={3} />+
+            </h2>
+            <p className="text-[16px] sm:text-[18px] text-[#9C9C9C] font-[400] text-center">
+              Countries
+            </p>
           </div>
         </div>
       </div>
+
       {/* Enhanced Features */}
       <div
         style={{
           backgroundImage: `url(${section2})`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
-          backgroundPositionc: "center",
-          top: "5%",
+          backgroundPosition: "center",
         }}
-        className="w-full relative -top-4 h-[60vh] flex justify-center align-middle mt-[10rem]"
+        className="w-full relative h-[80vh] flex flex-col lg:flex-row justify-center items-center mt-[10rem] lg:mt-0 px-4 lg:px-60"
       >
-        <div className="feature-padding_two flex gap-2 justify-center align-middle  ">
-          <div className="w-[50%] mt-12">
-            <div>
-              <h2 className="font-[700]  sm:text-3xl md:text-4xl lg:text-[32px]  mb-8  bg-gradient-to-b from-[#F6F6F7] to-[#7E808F] bg-clip-text text-transparent">
-                Providing enhanced features across <br />
-                variety of industries
-              </h2>
-            </div>
-            <div>
-              <p className="text-[18px] text-[#8F9BB7] w-[70%]">
-                Lorem ipsum dolor sit amet consectetur. Sit non diam justo
-                fames. Blandit et purus mollis convallis malesuada egestas risus
-                quam enim. Semper lorem rhoncus et felis tristique tellus
-                volutpat orci. Dui elementum a sed.
-              </p>
-            </div>
-            <div className="mt-8 flex flex-col gap-3">
-              <div className="flex gap-3">
-                {" "}
-                <div className="flex gap-2 justify-center align-middle bg-[#FFFFFF0D] bg-opacity-5% pr-6 pl-3 pt-2 pb-2 rounded-md ">
-                  <div>
-                    <img src={check} alt="" />
-                  </div>
-                  <div>
-                    <h3 className="text-[18px] font-[600]">Law Firms</h3>
-                  </div>
-                </div>
-                <div className="flex gap-2 justify-center align-middle bg-[#FFFFFF0D] bg-opacity-5% pr-6 pl-3 pt-2 pb-2 rounded-md ">
-                  <div>
-                    <img src={check} alt="" />
-                  </div>
-                  <div>
-                    <h3 className="text-[18px] font-[600]">IT Consulting</h3>
-                  </div>
-                </div>
-                <div className="flex gap-2 justify-center align-middle bg-[#FFFFFF0D] bg-opacity-5% pr-6 pl-3 pt-2 pb-2 rounded-md ">
-                  <div>
-                    <img src={check} alt="" />
-                  </div>
-                  <div>
-                    <h3 className="text-[18px] font-[600]">Finances</h3>
-                  </div>
-                </div>
+        <div className="w-full lg:w-[50%] mt-8 lg:mt-12 flex flex-col gap-6">
+          <h2 className="font-[700] text-2xl sm:text-3xl md:text-4xl lg:text-[32px] text-center lg:text-left mb-6 bg-gradient-to-b from-[#F6F6F7] to-[#7E808F] bg-clip-text text-transparent">
+            Providing enhanced features across <br /> variety of industries
+          </h2>
+          <p className="text-[14px] sm:text-[16px] md:text-[18px] text-[#8F9BB7] text-center lg:text-left lg:w-[70%]">
+            Lorem ipsum dolor sit amet consectetur. Sit non diam justo fames.
+            Blandit et purus mollis convallis malesuada egestas risus quam enim.
+            Semper lorem rhoncus et felis tristique tellus volutpat orci. Dui
+            elementum a sed.
+          </p>
+          <div className="grid grid-cols-3 gap-4">
+            {[
+              "Law Firms",
+              "IT Consulting",
+              "Finances",
+              "Marketing",
+              "Healthcare",
+            ].map((feature, index) => (
+              <div
+                key={index}
+                className="flex items-center gap-2 bg-[#FFFFFF0D] bg-opacity-5 p-3 rounded-md"
+              >
+                <img src={check} alt="" />
+                <h3 className="text-[14px] sm:text-[16px] font-[600]">
+                  {feature}
+                </h3>
               </div>
-              <div className="flex gap-3">
-                {" "}
-                <div className="flex gap-2 justify-center align-middle bg-[#FFFFFF0D] bg-opacity-5% pr-6 pl-3 pt-2 pb-2 rounded-md ">
-                  <div>
-                    <img src={check} alt="" />
-                  </div>
-                  <div>
-                    <h3 className="text-[18px] font-[600]">Law Firms</h3>
-                  </div>
-                </div>
-                <div className="flex gap-2 justify-center align-middle bg-[#FFFFFF0D] bg-opacity-5% pr-6 pl-3 pt-2 pb-2 rounded-md ">
-                  <div>
-                    <img src={check} alt="" />
-                  </div>
-                  <div>
-                    <h3 className="text-[18px] font-[600]">IT Consulting</h3>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <img src={about} alt="" className="h-[30rem] w-[30rem] -top-4 " />
+            ))}
           </div>
         </div>
+        <div className="w-full lg:w-[50%] flex justify-end mt-8 lg:mt-0">
+          <img src={about} alt="" className="max-w-full h-auto object-cover" />
+        </div>
       </div>
-      <div className="text-center mt-12">
-        <h2 className="font-[700]  sm:text-3xl md:text-4xl lg:text-[32px]  mb-2  bg-gradient-to-b from-[#F6F6F7] to-[#7E808F] bg-clip-text text-transparent">
+      <div className="text-center mt-20 px-4">
+        <h2 className="font-[700] text-2xl sm:text-3xl md:text-4xl lg:text-[32px] mb-4 bg-gradient-to-b from-[#F6F6F7] to-[#7E808F] bg-clip-text text-transparent">
           Exclusive Features
         </h2>
-        <p className="text-[12px] text-[#8F9BB7] font-[400] font-beVietnam">
+        <p className="text-[12px] sm:text-[14px] md:text-[16px] text-[#8F9BB7] font-[400]">
           Rmet facilisi arcu odio urna aenean erat. Pellentesque in vitae
-          lobortis orci tincidunt <br /> facilisis. Pulvinar lacus ultricies
-          turpis urna sapien.
+          lobortis orci tincidunt <br className="hidden md:block" />
+          facilisis. Pulvinar lacus ultricies turpis urna sapien.
         </p>
       </div>
-      {/* Exlusive Features */}
       <div
         style={{
           backgroundImage: `url(${hero})`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
         }}
-        className="w-full relative -top-4 h-[90vh] flex flex-col justify-center align-middle mt-20"
+        className="w-full relative -top-4 h-[90vh] flex flex-col justify-center mt-20"
       >
-        <div className="flex flex-col justify-center items-center m-2 h-auto">
-          <div className="flex mt-12  justify-center w-[80%] gap-8 h-auto">
-            <div className="w-[40%] flex justify-center  align-middle">
+        <div className="flex flex-col justify-center items-center px-4 md:px-8 lg:px-12">
+          <div className="flex flex-col lg:flex-row justify-center items-center w-full md:gap-8 lg:gap-8">
+            <div className="flex justify-center lg:w-[40%]">
               <img
                 src={ft}
                 alt=""
-                className="w-[28rem] h-[28rem] ml-[10rem] mt-[5rem]"
+                className="w-[16rem] h-[16rem] md:w-[22rem] md:h-[22rem] lg:w-[28rem] lg:h-[28rem] ml-0 lg:ml-[2rem] mt-28 lg:mt-[5rem]"
               />
             </div>
             <div>
-              <div className="w-auto gap-10 flex flex-col p-8">
-                <div className="flex gap-6  border rounded-md pl-6 pr-6 pt-3 pb-3 bg-[#FFFFFF0D] bg-opacity-5">
+              <div className="w-auto gap-10 flex flex-col p-2">
+                <div className="flex flex-row md:flex-row gap-4 md:gap-6 border rounded-md p-2 md:pl-6 md:pr-6 md:pt-3 md:pb-3 bg-[#FFFFFF0D] bg-opacity-5">
                   <div className="flex justify-center items-center align-middle">
-                    <img src={service1} alt="" className="w-[4rem] h-[4rem]" />
+                    <img
+                      src={service1}
+                      alt=""
+                      className="w-[4rem] sm:w-[4rem] sm:h-[4rem] md:w-[4rem] md:h-[4rem] lg:w-[5rem] lg:h-[5rem] xl:w-[4rem] xl:h-[4rem]"
+                    />
                   </div>
                   <div className="flex flex-col justify-center gap-1">
-                    <h3 className="text-[27px] font-[600]">Law Firms</h3>
-                    <p className="text-[16px] text-[#67687A] font-[400]">
-                      Sed perspiciatis unde omnis <br /> natus error voluptatem
+                    <h3 className="md:text-[27px] lg:text-[27px] text-[20px] font-[600]">
+                      Law Firms
+                    </h3>
+                    <p className="text-[12px] md:text-[14px] lg:text-[16px] text-[#67687A] font-[400]">
+                      Sed perspiciatis unde omnis natus error voluptatem
                     </p>
                   </div>
-                  <div className="flex justify-center align-middle mt-2  items-center">
+                  <div className="flex justify-end mt-2 items-center">
                     <div>
                       <img
                         src={export_1}
                         alt=""
-                        className="w-[4rem] h-[4rem]"
+                        className="w-full md:w-[80%]"
                       />
                     </div>
                   </div>
                 </div>
-                <div className="flex  gap-6  rounded-md pl-6 pr-6 pt-3 pb-3 bg-[#FFFFFF0D] bg-opacity-5 ml-[5rem] -mr-[2rem] justify-center">
+                <div className="flex flex-row md:flex-row gap-4 md:gap-6 rounded-md p-2 md:pl-6 md:pr-6 md:pt-3 md:pb-3 bg-[#FFFFFF0D] bg-opacity-5 md:ml-[5rem] md:-mr-[2rem] justify-center">
                   <div className="flex justify-center items-center align-middle">
-                    <img src={service2} alt="" className="w-[4rem] h-[4rem]" />
+                    <img
+                      src={service2}
+                      alt=""
+                      className="w-[4rem] sm:w-[4rem] sm:h-[4rem] md:w-[4rem] md:h-[4rem] lg:w-[5rem] lg:h-[5rem] xl:w-[4rem] xl:h-[4rem]"
+                    />
                   </div>
                   <div className="flex flex-col justify-center gap-1">
-                    <h3 className="text-[27px] font-[600]">IT Consulting</h3>
-                    <p className="text-[16px] text-[#67687A] font-[400]">
-                      Sed perspiciatis unde omnis <br /> natus error voluptatem
+                    <h3 className="md:text-[27px] lg:text-[27px] text-[20px] font-[600]">
+                      IT Consulting
+                    </h3>
+                    <p className="text-[12px] md:text-[14px] lg:text-[16px] text-[#67687A] font-[400]">
+                      Sed perspiciatis unde omnis natus error voluptatem
                     </p>
                   </div>
                   <div className="flex justify-center align-middle mt-2  items-center">
@@ -343,73 +338,78 @@ const MoreFeatures = () => {
                       <img
                         src={export_1}
                         alt=""
-                        className="w-[4rem] h-[4rem]"
+                        className="w-full md:w-[80%]"
                       />
                     </div>
                   </div>
                 </div>
-                <div className="flex  gap-6 rounded-md pl-6 pr-6 pt-3 pb-3 bg-[#FFFFFF0D] bg-opacity-5 ml-[7rem] -mr-[4rem]">
+                <div className="flex flex-row md:flex-row gap-4 md:gap-6 rounded-md p-2 md:pl-6 md:pr-6 md:pt-3 md:pb-3 bg-[#FFFFFF0D] bg-opacity-5 md:ml-[7rem] md:-mr-[4rem] justify-center">
                   <div className="flex justify-center items-center align-middle">
-                    <img src={service3} alt="" className="w-[4rem] h-[4rem]" />
+                    <img
+                      src={service3}
+                      alt=""
+                      className="w-[4rem] sm:w-[4rem] sm:h-[4rem] md:w-[4rem] md:h-[4rem] lg:w-[5rem] lg:h-[5rem] xl:w-[4rem] xl:h-[4rem]"
+                    />
                   </div>
                   <div className="flex flex-col justify-center gap-1">
-                    <h3 className="text-[27px] font-[600]">Finances</h3>
-                    <p className="text-[16px] text-[#67687A] font-[400]">
-                      Sed perspiciatis unde omnis <br /> natus error voluptatem
+                    <h3 className="md:text-[27px] lg:text-[27px] text-[20px] font-[600]">
+                      Finances
+                    </h3>
+                    <p className="text-[12px] md:text-[14px] lg:text-[16px] text-[#67687A] font-[400]">
+                      Sed perspiciatis unde omnis natus error voluptatem
                     </p>
                   </div>
                   <div className="flex justify-center align-middle mt-2  items-center">
-                    <div>
-                      <img
-                        src={export_1}
-                        alt=""
-                        className="w-[4rem] h-[4rem]"
-                      />
-                    </div>
+                    <img src={export_1} alt="" className="w-full md:w-[80%]" />
                   </div>
                 </div>
-                <div className="flex  gap-6  rounded-md pl-6 pr-6 pt-3 pb-3 bg-[#FFFFFF0D] bg-opacity-5 ">
+                <div className="flex flex-row md:flex-row gap-4 md:gap-6 rounded-md p-2 md:pl-6 md:pr-6 md:pt-3 md:pb-3 bg-[#FFFFFF0D] bg-opacity-5 ">
                   <div className="flex justify-center items-center align-middle">
-                    <img src={service4} alt="" className="w-[4rem] h-[4rem]" />
+                    <img
+                      src={service4}
+                      alt=""
+                      className="w-[4rem] sm:w-[4rem] sm:h-[4rem] md:w-[4rem] md:h-[4rem] lg:w-[5rem] lg:h-[5rem] xl:w-[4rem] xl:h-[4rem]"
+                    />
                   </div>
                   <div className="flex flex-col justify-center gap-1">
-                    <h3 className="text-[27px] font-[600]">Business Growth</h3>
-                    <p className="text-[16px] text-[#67687A] font-[400]">
-                      Sed perspiciatis unde omnis <br /> natus error voluptatem
+                    <h3 className="md:text-[27px] lg:text-[27px] text-[20px] font-[600]">
+                      Business Growth
+                    </h3>
+                    <p className="text-[12px] md:text-[14px] lg:text-[16px] text-[#67687A] font-[400]">
+                      Sed perspiciatis unde omnis natus error voluptatem
                     </p>
                   </div>
-                  <div className="flex justify-center align-middle mt-2  items-center">
-                    <div>
-                      <img
-                        src={export_1}
-                        alt=""
-                        className="w-[4rem] h-[4rem]"
-                      />
-                    </div>
+                  <div className="flex justify-center mt-2 items-center">
+                    <img src={export_1} alt="" className="w-full md:w-[80%]" />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="mt-6">
-            <div className="flex  gap-6  rounded-md p-4 bg-[#FFFFFF0D] bg-opacity-5 ">
-              <div className="flex justify-center items-center align-middle">
-                <img src={service5} alt="" className="w-[4rem] h-[4rem]" />
+
+          <div className="mt-6 p-2">
+            <div className="flex flex-row gap-4 rounded-md p-2 bg-[#FFFFFF0D] bg-opacity-5">
+              <div className="flex justify-center items-center">
+                <img
+                  src={service5}
+                  alt=""
+                  className="w-[4rem] sm:w-[4rem] sm:h-[4rem] md:w-[4rem] md:h-[4rem] lg:w-[5rem] lg:h-[5rem] xl:w-[4rem] xl:h-[4rem]"
+                />
               </div>
               <div className="flex flex-col justify-center gap-1">
-                <h3 className="text-[27px] font-[600]">Insurance</h3>
-                <p className="text-[16px] text-[#67687A] font-[400]">
-                  Sed perspiciatis unde omnis <br /> natus error voluptatem
+                <h3 className="md:text-[27px] lg:text-[27px] text-[20px] font-[600]">
+                  Insurance
+                </h3>
+                <p className="text-[12px] md:text-[14px] lg:text-[16px] text-[#67687A] font-[400]">
+                  Sed perspiciatis unde omnis natus error voluptatem
                 </p>
               </div>
-              <div className="flex justify-center align-middle mt-2  items-center">
-                <div>
-                  <img src={export_1} alt="" className="w-[5rem] h-[5rem]" />
-                </div>
+              <div className="flex justify-center mt-2 items-center">
+                <img src={export_1} alt="" className="w-full md:w-[80%]" />
               </div>
             </div>
           </div>
-          <div className="flex flex-wrap justify-center items-center gap-4 mt-12 mb-12">
+          <div className="flex flex-wrap justify-center items-center gap-4 mt-12 mb-10">
             <button className="bg-[#7214FF] px-6 py-2 rounded-2xl text-[12px]">
               Get Started
             </button>
@@ -419,7 +419,7 @@ const MoreFeatures = () => {
           </div>
         </div>
       </div>
-      <div className="home-container">
+      <div className="home-container mt-[10rem] md:mt-0 lg:mt-0 xl:mt-0">
         <Footer />
       </div>
     </div>
