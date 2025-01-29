@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import email from "../assets/email.png";
 import location from "../assets/location.png";
 import insta from "../assets/insta.png";
@@ -7,8 +7,80 @@ import box from "../assets/contact-box.png";
 import link from "../assets/link.png";
 import hero from "../assets/hero-bg.png";
 import Footer from "../Footer/Footer";
+import toast from "react-hot-toast";
+import emailjs from "@emailjs/browser";
+
+// 4MFf344zFLyc
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phoneNumber: "",
+    field: "",
+    subject: {
+      demo: false,
+      brandIdentity: false,
+    },
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+
+    if (type === "checkbox") {
+      setFormData((prev) => ({
+        ...prev,
+        subject: {
+          ...prev.subject,
+          [name]: checked,
+        },
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
+  };
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+
+    console.log("User Input Data:", formData);
+
+    const serviceId = "service_del2vde";
+    const templateId = "template_zfskluc";
+    const publicKey = "u18j2xzz3UEfrCPB0";
+
+    const templateParams = {
+      from_name: formData.fullName,
+      from_email: formData.email,
+      to_name: "Datacove",
+      message: formData.message,
+    };
+
+    try {
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+      setFormData({
+        fullName: "",
+        email: "",
+        phoneNumber: "",
+        field: "",
+        subject: {
+          demo: false,
+          brandIdentity: false,
+        },
+        message: "",
+      });
+
+      toast.success("Message sent successfully!");
+    } catch (error) {
+      console.error("Error sending email", error);
+      toast.error("Failed to send message. Try again.");
+    }
+  };
+
   return (
     <>
       <div className="home-container">
@@ -51,45 +123,73 @@ const Contact = () => {
             </div>
           </div>
           <div className="md:w-[70%] mt-[5rem] flex flex-col h-auto justify-between">
-            <form className=" flex flex-col pl-4 gap-8 pr-4">
+            <form
+              className=" flex flex-col pl-4 gap-8 pr-4"
+              onSubmit={onSubmit}
+            >
               <div className="flex flex-row gap-4 justify-between">
                 <div className="flex flex-col w-[50%] gap-4">
                   <div className="flex flex-col ">
                     <label className="font-beVietnam text-[16px]">
-                      First Name
+                      Full Name
                     </label>
                     <input
+                      value={formData.fullName}
+                      name="fullName"
                       type="text"
+                      onChange={handleChange}
                       className="bg-inherit border-b border-[#FFFFFF]  h-9 text-sm placeholder:text-xs focus:outline-none"
                     />
                   </div>
+
+                  <div className="flex flex-col">
+                    <label className="font-beVietnam text-[16px]">Field</label>
+                    <select
+                      name="field"
+                      value={formData.field}
+                      onChange={handleChange}
+                      className="bg-inherit border-b h-9 text-sm focus:outline-none"
+                    >
+                      <option value="" disabled className="text-black">
+                        Select an option
+                      </option>
+                      <option value="Legal " className="text-black">
+                        Legal
+                      </option>
+                      <option value="Supply Chain" className="text-black">
+                        Supply Chain
+                      </option>
+                      <option value="Real Estate" className="text-black">
+                        Real Estate
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div className="flex flex-col  w-[50%] gap-4">
                   <div className="flex flex-col ">
                     <label className="font-beVietnam text-[16px]">Email</label>
                     <input
                       type="email"
-                      className="bg-inherit border-b    h-9 text-sm placeholder:text-xs focus:outline-none"
+                      value={formData.email}
+                      name="email"
+                      onChange={handleChange}
+                      className="bg-inherit border-b  h-9 text-sm placeholder:text-xs focus:outline-none"
                     />
-                  </div>
-                </div>
-                <div className="flex flex-col  w-[50%] gap-4">
-                  <div className="flex flex-col">
-                    <label className="font-beVietnam text-[16px]">
-                      Last Name
-                    </label>
-                    <input className="bg-inherit border-b    h-9 text-sm placeholder:text-xs focus:outline-none" />
                   </div>
                   <div className="flex flex-col">
                     <label className="font-beVietnam text-[16px]">
                       Phone Number
                     </label>
                     <div className="flex">
-                      {" "}
                       <span className="font-beVietnam text-[16px] border-b  border-[#FFFFFF] ">
-                        +91
+                        +1
                       </span>
                       <input
                         type="number"
-                        className="bg-inherit border-b w-full border-[#FFFFFF] ml-4 h-9 text-sm placeholder:text-xs focus:outline-none "
+                        value={formData.phoneNumber}
+                        onChange={handleChange}
+                        name="phoneNumber"
+                        className="bg-inherit border-b w-full border-[#FFFFFF] ml-4 h-9 text-sm placeholder:text-xs focus:outline-none no-arrows "
                       />
                     </div>
                   </div>
@@ -100,7 +200,6 @@ const Contact = () => {
                   Select Subject?
                 </h3>
                 <div className="flex gap-6">
-                  {" "}
                   <div className="flex gap-3 ">
                     <input
                       type="checkbox"
@@ -120,9 +219,11 @@ const Contact = () => {
               <div className="flex flex-col gap-4">
                 <h3 className="font-beVietnam text-[16px]">Message</h3>
                 <textarea
-                  name=""
+                  value={formData.message}
                   id=""
                   placeholder="Write your message"
+                  name="message"
+                  onChange={handleChange}
                   className="bg-inherit border-b w-full h-9 text-sm placeholder:text-xs placeholder:text-white flex items-center pl-2 focus:outline-none"
                 ></textarea>
               </div>
