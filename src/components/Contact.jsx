@@ -61,7 +61,7 @@ const Contact = () => {
     };
 
     try {
-      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+      emailjs.send(serviceId, templateId, templateParams, publicKey);
       setFormData({
         fullName: "",
         email: "",
