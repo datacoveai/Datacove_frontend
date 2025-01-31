@@ -82,12 +82,12 @@ const Career = () => {
               <img
                 src={img}
                 alt=""
-                className="absolute bottom-0 right-[4rem]"
+                className="absolute bottom-0 right-[4rem] "
               />
               <img
                 src={circle}
                 alt=""
-                className="absolute bottom-0 right-[8rem]"
+                className="absolute bottom-0 right-[8rem] -z-1"
               />
               <div className="w-full gap-3 flex flex-col justify-between p-2">
                 <div className="flex justify-between">
@@ -105,7 +105,7 @@ const Career = () => {
                   <h2 className="text-[22px] font-[700]">UX Designer</h2>
                   <p>Advoit Digital Agency</p>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between z-10">
                   <div>
                     <button className="px-6 py-2 text-white font-semibold rounded-md shadow-lg bg-gradient-to-b from-[#CE9FFC] via-[#A582F7] to-[#7367F0] hover:opacity-90 transition">
                       Apply
@@ -130,7 +130,7 @@ const Career = () => {
               <img
                 src={circle}
                 alt=""
-                className="absolute bottom-0 right-[8rem]"
+                className="absolute bottom-0 right-[8rem] -z-1"
               />
               <div className="w-full gap-3 flex flex-col justify-between p-2">
                 <div className="flex justify-between">
@@ -148,7 +148,7 @@ const Career = () => {
                   <h2 className="text-[22px] font-[700]">UX Designer</h2>
                   <p>Advoit Digital Agency</p>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between z-10">
                   <div>
                     <button className="px-6 py-2 text-white font-semibold rounded-md shadow-lg bg-gradient-to-b from-[#CE9FFC] via-[#A582F7] to-[#7367F0] hover:opacity-90 transition">
                       Apply
@@ -173,7 +173,7 @@ const Career = () => {
               <img
                 src={circle}
                 alt=""
-                className="absolute bottom-0 right-[8rem]"
+                className="absolute bottom-0 right-[8rem] -z-1"
               />
               <div className="w-full gap-3 flex flex-col justify-between p-2">
                 <div className="flex justify-between">
@@ -191,7 +191,7 @@ const Career = () => {
                   <h2 className="text-[22px] font-[700]">UX Designer</h2>
                   <p>Advoit Digital Agency</p>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between z-10">
                   <div>
                     <button className="px-6 py-2 text-white font-semibold rounded-md shadow-lg bg-gradient-to-b from-[#CE9FFC] via-[#A582F7] to-[#7367F0] hover:opacity-90 transition">
                       Apply
@@ -219,7 +219,7 @@ const Career = () => {
               <img
                 src={circle}
                 alt=""
-                className="absolute bottom-0 right-[8rem]"
+                className="absolute bottom-0 right-[8rem] -z-1"
               />
               <div className="w-full gap-3 flex flex-col justify-between p-2">
                 <div className="flex justify-between">
@@ -237,7 +237,7 @@ const Career = () => {
                   <h2 className="text-[22px] font-[700]">UX Designer</h2>
                   <p>Advoit Digital Agency</p>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between z-10">
                   <div>
                     <button className="px-6 py-2 text-white font-semibold rounded-md shadow-lg bg-gradient-to-b from-[#CE9FFC] via-[#A582F7] to-[#7367F0] hover:opacity-90 transition">
                       Apply
@@ -262,7 +262,7 @@ const Career = () => {
               <img
                 src={circle}
                 alt=""
-                className="absolute bottom-0 right-[8rem]"
+                className="absolute bottom-0 right-[8rem] -z-1"
               />
               <div className="w-full gap-3 flex flex-col justify-between p-2">
                 <div className="flex justify-between">
@@ -280,7 +280,7 @@ const Career = () => {
                   <h2 className="text-[22px] font-[700]">UX Designer</h2>
                   <p>Advoit Digital Agency</p>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between z-10">
                   <div>
                     <button className="px-6 py-2 text-white font-semibold rounded-md shadow-lg bg-gradient-to-b from-[#CE9FFC] via-[#A582F7] to-[#7367F0] hover:opacity-90 transition">
                       Apply
@@ -305,7 +305,7 @@ const Career = () => {
               <img
                 src={circle}
                 alt=""
-                className="absolute bottom-0 right-[8rem]"
+                className="absolute bottom-0 right-[8rem] -z-1"
               />
               <div className="w-full gap-3 flex flex-col justify-between p-2">
                 <div className="flex justify-between">
@@ -323,7 +323,7 @@ const Career = () => {
                   <h2 className="text-[22px] font-[700]">UX Designer</h2>
                   <p>Advoit Digital Agency</p>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between z-10">
                   <div>
                     <button className="px-6 py-2 text-white font-semibold rounded-md shadow-lg bg-gradient-to-b from-[#CE9FFC] via-[#A582F7] to-[#7367F0] hover:opacity-90 transition">
                       Apply
