@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
-
+import logo from "../assets/logo.png";
+import { NavLink } from "react-router-dom";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -26,12 +27,14 @@ const Navbar = () => {
       {/* Logo */}
       <div className="text-[20px] font-bold cursor-pointer">
         <Link to="/">
-          <h2>LOGO</h2>
+          <div>
+            <img src={logo} alt="" className="mt-[10px]" />
+          </div>
         </Link>
       </div>
 
       {/* Hamburger Icon (Visible on small screens) */}
-      <div className="lg:hidden absolute top-5 right-5 flex items-center cursor-pointer z-50">
+      <div className="lg:hidden absolute  right-5 flex justify-center align-middle items-center cursor-pointer z-50">
         <RxHamburgerMenu
           size={30}
           className="cursor-pointer text-white"
@@ -45,31 +48,73 @@ const Navbar = () => {
         } absolute top-[50px] left-0 w-full h-screen bg-[#060B27] lg:flex lg:static lg:w-auto lg:items-center lg:gap-8 lg:bg-transparent lg:h-auto`}
       >
         <div className="flex flex-col gap-4 p-5 lg:flex-row lg:p-0 lg:gap-8 text-gray-400 text-[12px]">
-          <Link to="/morefeatures" className="cursor-pointer hover:text-white">
+          <NavLink
+            to="/morefeatures"
+            className={({ isActive }) =>
+              `cursor-pointer hover:text-white ${
+                isActive
+                  ? " text-white underline decoration-[white] underline-offset-[10px] "
+                  : ""
+              }`
+            }
+          >
             Features
-          </Link>
-          <Link to="/pricing" className="cursor-pointer hover:text-white">
+          </NavLink>
+          <NavLink
+            to="/pricing"
+            className={({ isActive }) =>
+              `cursor-pointer hover:text-white ${
+                isActive
+                  ? "text-white underline decoration-[white] underline-offset-[10px]"
+                  : ""
+              }`
+            }
+          >
             Pricing
-          </Link>
-          <Link to="/agents" className="cursor-pointer hover:text-white">
-            Agents
-          </Link>
-          <Link to="/about-us" className="cursor-pointer hover:text-white">
+          </NavLink>
+          <NavLink
+            to="/career"
+            className={({ isActive }) =>
+              `cursor-pointer hover:text-white ${
+                isActive
+                  ? "text-white underline decoration-[white] underline-offset-[10px]"
+                  : ""
+              }`
+            }
+          >
+            Career
+          </NavLink>
+          <NavLink
+            to="/about-us"
+            className={({ isActive }) =>
+              `cursor-pointer hover:text-white ${
+                isActive
+                  ? "text-white underline decoration-[white] underline-offset-[10px]"
+                  : ""
+              }`
+            }
+          >
             About Us
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             to="/contact-us"
-            className="cursor-pointer hover:text-white"
             onClick={toggleMenu}
+            className={({ isActive }) =>
+              `cursor-pointer hover:text-white ${
+                isActive
+                  ? "text-white underline decoration-[white] underline-offset-[10px]"
+                  : ""
+              }`
+            }
           >
             Contact Us
-          </Link>
+          </NavLink>
         </div>
       </div>
 
       {/* Demo Button */}
       <div className="hidden lg:block text-[20px] font-bold">
-        <button className="px-4 py-2 text-white rounded-2xl hover:bg-blue-600">
+        <button className="px-4 py-2 text-white rounded-2xl hover:bg-[#7214FF]">
           DEMO
         </button>
       </div>

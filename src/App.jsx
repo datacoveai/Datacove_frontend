@@ -12,6 +12,7 @@ import "./index.css";
 import Contact from "./components/Contact";
 import Pricing from "./components/Pricing";
 import MoreFeatures from "./components/MoreFeatures";
+import Career from "./components/Career";
 
 const Home = () => {
   return (
@@ -31,7 +32,12 @@ const App = () => {
   const location = useLocation();
 
   // Define the routes where you want to remove the `home-container`
-  const noContainerRoutes = ["/contact-us", "/pricing", "/morefeatures"];
+  const noContainerRoutes = [
+    "/contact-us",
+    "/pricing",
+    "/morefeatures",
+    "/career",
+  ];
 
   // Check if the current path matches any route in `noContainerRoutes`
   const isNoContainer = noContainerRoutes.includes(location.pathname);
@@ -44,6 +50,7 @@ const App = () => {
         <Route path="/contact-us" element={<Contact />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/morefeatures" element={<MoreFeatures />} />
+        <Route path="/career" element={<Career />} />
       </Routes>
     </div>
   );

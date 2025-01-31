@@ -87,12 +87,12 @@ const MoreFeatures = () => {
       </div>
 
       {/* AI's Potential */}
-      <div className="feature-padding_two flex flex-col lg:flex-row gap-6 justify-center items-center mb-6 mt-[10rem] px-4 lg:px-16">
+      <div className="feature-padding_two flex flex-col lg:flex-row gap-6 justify-center items-center mb-6 mt-[10rem] lg:mt-[20rem] px-4 ">
         <div className="p-4">
           <img src={feature_img} alt="Feature" className="max-w-full h-auto" />
         </div>
         <div
-          className="flex flex-col items-center bg-cover bg-center w-full lg:w-[50%] py-6"
+          className="flex flex-col items-center bg-cover bg-center w-full lg:w-[50%] py-6 lg:-mt-[8rem]"
           style={{
             backgroundImage: `url(${heading})`,
             backgroundSize: "contain",
@@ -100,12 +100,12 @@ const MoreFeatures = () => {
             backgroundRepeat: "no-repeat",
           }}
         >
-          <div className="flex justify-center items-center text-center w-full lg:w-[80%] mb-6 z-50">
+          <div className="flex justify-center items-center text-center w-full lg:w-[80%] mb-6 z-50 lg:mt-[3rem]">
             <h2 className="font-[700] text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[40px] h-auto bg-gradient-to-b from-[#F6F6F7] to-[#7E808F] bg-clip-text text-transparent">
               Unleashing AI’s Potential in Your Documents
             </h2>
           </div>
-          <div className="flex flex-wrap gap-6 justify-center items-start w-full lg:w-[80%] px-4">
+          <div className="flex flex-wrap gap-6 justify-center items-start w-full lg:w-[80%] px-4 ">
             <div className="flex flex-col gap-8 w-full md:w-[45%]">
               <div className="flex gap-4 items-start">
                 <img src={feature_1} alt="Feature 1" className="h-10 w-10" />

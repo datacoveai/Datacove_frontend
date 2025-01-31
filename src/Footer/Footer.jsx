@@ -4,6 +4,7 @@ import facebook from "../assets/facebook.png";
 import twitter from "../assets/twitter.png";
 import instagram from "../assets/instagram.png";
 import linkdin from "../assets/linkedin.png";
+import logo from "../assets/logo.png";
 
 const Footer = () => {
   return (
@@ -16,9 +17,9 @@ const Footer = () => {
       >
         <div className="flex flex-col md:flex-row md:justify-center md:items-start items-center  md:gap-12">
           <div className="flex flex-col md:justify-between gap-4 w-80 md:mr-6    ">
-            <h2 className="text-[20px] font-bold text-center md:text-start">
-              LOGO
-            </h2>
+            <div className="text-[20px] font-bold text-center md:text-start">
+              <img src={logo} alt="" />
+            </div>
             <div className="bg-[#262d52] flex flex-col bg-opacity-40 p-4 gap-4 border border-[#4e4e4e] border-opacity-20 rounded-md ">
               <h3 className="text-[18px] text-[700] font-bold font-beVietnam">
                 Subscribe to our newsletter
