@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import hero from "../assets/hero-bg.png";
 import feature from "../assets/career-hero.png";
 import Footer from "../Footer/Footer";
 import img from "../assets/career-img.png";
 import circle from "../assets/Ellipse.png";
 import people from "../assets/people.png";
+import axios from "axios";
+import { MdClose } from "react-icons/md";
+import CareerApplyCard from "../Cards/CareerApplyCard";
 
 const Career = () => {
+  const jobListings = [
+    { id: 1, title: "UX Designer", company: "Advoit Digital Agency" },
+    { id: 2, title: "UI Designer", company: "Creative Agency" },
+    { id: 3, title: "Frontend Developer", company: "Tech Solutions" },
+    { id: 4, title: "Frontend Developer", company: "Tech Innovations" },
+    { id: 5, title: "Backend Developer", company: "CodeCraft Inc." },
+    { id: 6, title: "Product Manager", company: "Visionary Solutions" },
+  ];
+
   return (
     <div className="mt-32  ">
       <div className="home-container flex flex-col-reverse lg:flex-row gap-8 justify-between items-center px-4 h-[600px]">
@@ -75,270 +87,28 @@ const Career = () => {
             </div>
           </div>
         </div>
-        <div className="mt-[2rem] grid grid-rows-2 gap-4 pl-[14rem] pr-[14rem] h-[64%] mb-[4rem]">
+        <div className="home-container mt-[2rem] grid grid-rows-2 gap-4 pl-[14rem] pr-[14rem] h-[64%] mb-[4rem]">
           {/* 1st row */}
           <div className="grid grid-cols-3 gap-4">
-            <div className="bg-[#150C46] flex   p-4 relative overflow-hidden">
-              <img
-                src={img}
-                alt=""
-                className="absolute bottom-0 right-[4rem] "
+            {jobListings.slice(0, 3).map((job) => (
+              <CareerApplyCard
+                key={job.id}
+                number={job.id}
+                title={job.title}
+                company={job.company}
               />
-              <img
-                src={circle}
-                alt=""
-                className="absolute bottom-0 right-[8rem] -z-1"
-              />
-              <div className="w-full gap-3 flex flex-col justify-between p-2">
-                <div className="flex justify-between">
-                  <button className="border-white border-[0.9px] pt-2 pb-2 rounded-[10px] pl-6 pr-6">
-                    Full Time
-                  </button>
-                  <button className="border-white border-[0.9px] pt-2 pb-2 pl-6 pr-6 rounded-[10px]">
-                    Onsite
-                  </button>
-                  <button className="border-white border-[0.9px] pt-2 pb-2 pl-6 pr-6 rounded-[10px]">
-                    $200K
-                  </button>
-                </div>
-                <div>
-                  <h2 className="text-[22px] font-[700]">UX Designer</h2>
-                  <p>Advoit Digital Agency</p>
-                </div>
-                <div className="flex justify-between z-10">
-                  <div>
-                    <button className="px-6 py-2 text-white font-semibold rounded-md shadow-lg bg-gradient-to-b from-[#CE9FFC] via-[#A582F7] to-[#7367F0] hover:opacity-90 transition">
-                      Apply
-                    </button>
-                  </div>
-                  <div className="flex w-[25%] justify-between items-center">
-                    <div>
-                      <img src={people} alt="" />
-                    </div>
-
-                    <p>24 applied</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="bg-[#150C46] flex   p-4 relative overflow-hidden">
-              <img
-                src={img}
-                alt=""
-                className="absolute bottom-0 right-[4rem]"
-              />
-              <img
-                src={circle}
-                alt=""
-                className="absolute bottom-0 right-[8rem] -z-1"
-              />
-              <div className="w-full gap-3 flex flex-col justify-between p-2">
-                <div className="flex justify-between">
-                  <button className="border-white border-[0.9px] pt-2 pb-2 rounded-[10px] pl-6 pr-6">
-                    Full Time
-                  </button>
-                  <button className="border-white border-[0.9px] pt-2 pb-2 pl-6 pr-6 rounded-[10px]">
-                    Onsite
-                  </button>
-                  <button className="border-white border-[0.9px] pt-2 pb-2 pl-6 pr-6 rounded-[10px]">
-                    $200K
-                  </button>
-                </div>
-                <div>
-                  <h2 className="text-[22px] font-[700]">UX Designer</h2>
-                  <p>Advoit Digital Agency</p>
-                </div>
-                <div className="flex justify-between z-10">
-                  <div>
-                    <button className="px-6 py-2 text-white font-semibold rounded-md shadow-lg bg-gradient-to-b from-[#CE9FFC] via-[#A582F7] to-[#7367F0] hover:opacity-90 transition">
-                      Apply
-                    </button>
-                  </div>
-                  <div className="flex w-[25%] justify-between items-center">
-                    <div>
-                      <img src={people} alt="" />
-                    </div>
-
-                    <p>24 applied</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="bg-[#150C46] flex   p-4 relative overflow-hidden">
-              <img
-                src={img}
-                alt=""
-                className="absolute bottom-0 right-[4rem]"
-              />
-              <img
-                src={circle}
-                alt=""
-                className="absolute bottom-0 right-[8rem] -z-1"
-              />
-              <div className="w-full gap-3 flex flex-col justify-between p-2">
-                <div className="flex justify-between">
-                  <button className="border-white border-[0.9px] pt-2 pb-2 rounded-[10px] pl-6 pr-6">
-                    Full Time
-                  </button>
-                  <button className="border-white border-[0.9px] pt-2 pb-2 pl-6 pr-6 rounded-[10px]">
-                    Onsite
-                  </button>
-                  <button className="border-white border-[0.9px] pt-2 pb-2 pl-6 pr-6 rounded-[10px]">
-                    $200K
-                  </button>
-                </div>
-                <div>
-                  <h2 className="text-[22px] font-[700]">UX Designer</h2>
-                  <p>Advoit Digital Agency</p>
-                </div>
-                <div className="flex justify-between z-10">
-                  <div>
-                    <button className="px-6 py-2 text-white font-semibold rounded-md shadow-lg bg-gradient-to-b from-[#CE9FFC] via-[#A582F7] to-[#7367F0] hover:opacity-90 transition">
-                      Apply
-                    </button>
-                  </div>
-                  <div className="flex w-[25%] justify-between items-center">
-                    <div>
-                      <img src={people} alt="" />
-                    </div>
-
-                    <p>24 applied</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
           {/* 2nd row */}
           <div className="grid grid-cols-3 gap-4">
-            <div className="bg-[#150C46] flex   p-4 relative overflow-hidden">
-              <img
-                src={img}
-                alt=""
-                className="absolute bottom-0 right-[4rem]"
+            {jobListings.slice(3, 6).map((job) => (
+              <CareerApplyCard
+                key={job.id}
+                number={job.id}
+                title={job.title}
+                company={job.company}
               />
-              <img
-                src={circle}
-                alt=""
-                className="absolute bottom-0 right-[8rem] -z-1"
-              />
-              <div className="w-full gap-3 flex flex-col justify-between p-2">
-                <div className="flex justify-between">
-                  <button className="border-white border-[0.9px] pt-2 pb-2 rounded-[10px] pl-6 pr-6">
-                    Full Time
-                  </button>
-                  <button className="border-white border-[0.9px] pt-2 pb-2 pl-6 pr-6 rounded-[10px]">
-                    Onsite
-                  </button>
-                  <button className="border-white border-[0.9px] pt-2 pb-2 pl-6 pr-6 rounded-[10px]">
-                    $200K
-                  </button>
-                </div>
-                <div>
-                  <h2 className="text-[22px] font-[700]">UX Designer</h2>
-                  <p>Advoit Digital Agency</p>
-                </div>
-                <div className="flex justify-between z-10">
-                  <div>
-                    <button className="px-6 py-2 text-white font-semibold rounded-md shadow-lg bg-gradient-to-b from-[#CE9FFC] via-[#A582F7] to-[#7367F0] hover:opacity-90 transition">
-                      Apply
-                    </button>
-                  </div>
-                  <div className="flex w-[25%] justify-between items-center">
-                    <div>
-                      <img src={people} alt="" />
-                    </div>
-
-                    <p>24 applied</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="bg-[#150C46] flex   p-4 relative overflow-hidden">
-              <img
-                src={img}
-                alt=""
-                className="absolute bottom-0 right-[4rem]"
-              />
-              <img
-                src={circle}
-                alt=""
-                className="absolute bottom-0 right-[8rem] -z-1"
-              />
-              <div className="w-full gap-3 flex flex-col justify-between p-2">
-                <div className="flex justify-between">
-                  <button className="border-white border-[0.9px] pt-2 pb-2 rounded-[10px] pl-6 pr-6">
-                    Full Time
-                  </button>
-                  <button className="border-white border-[0.9px] pt-2 pb-2 pl-6 pr-6 rounded-[10px]">
-                    Onsite
-                  </button>
-                  <button className="border-white border-[0.9px] pt-2 pb-2 pl-6 pr-6 rounded-[10px]">
-                    $200K
-                  </button>
-                </div>
-                <div>
-                  <h2 className="text-[22px] font-[700]">UX Designer</h2>
-                  <p>Advoit Digital Agency</p>
-                </div>
-                <div className="flex justify-between z-10">
-                  <div>
-                    <button className="px-6 py-2 text-white font-semibold rounded-md shadow-lg bg-gradient-to-b from-[#CE9FFC] via-[#A582F7] to-[#7367F0] hover:opacity-90 transition">
-                      Apply
-                    </button>
-                  </div>
-                  <div className="flex w-[25%] justify-between items-center">
-                    <div>
-                      <img src={people} alt="" />
-                    </div>
-
-                    <p>24 applied</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="bg-[#150C46] flex   p-4 relative overflow-hidden">
-              <img
-                src={img}
-                alt=""
-                className="absolute bottom-0 right-[4rem]"
-              />
-              <img
-                src={circle}
-                alt=""
-                className="absolute bottom-0 right-[8rem] -z-1"
-              />
-              <div className="w-full gap-3 flex flex-col justify-between p-2">
-                <div className="flex justify-between">
-                  <button className="border-white border-[0.9px] pt-2 pb-2 rounded-[10px] pl-6 pr-6">
-                    Full Time
-                  </button>
-                  <button className="border-white border-[0.9px] pt-2 pb-2 pl-6 pr-6 rounded-[10px]">
-                    Onsite
-                  </button>
-                  <button className="border-white border-[0.9px] pt-2 pb-2 pl-6 pr-6 rounded-[10px]">
-                    $200K
-                  </button>
-                </div>
-                <div>
-                  <h2 className="text-[22px] font-[700]">UX Designer</h2>
-                  <p>Advoit Digital Agency</p>
-                </div>
-                <div className="flex justify-between z-10">
-                  <div>
-                    <button className="px-6 py-2 text-white font-semibold rounded-md shadow-lg bg-gradient-to-b from-[#CE9FFC] via-[#A582F7] to-[#7367F0] hover:opacity-90 transition">
-                      Apply
-                    </button>
-                  </div>
-                  <div className="flex w-[25%] justify-between items-center">
-                    <div>
-                      <img src={people} alt="" />
-                    </div>
-
-                    <p>24 applied</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

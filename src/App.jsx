@@ -13,6 +13,7 @@ import Contact from "./components/Contact";
 import Pricing from "./components/Pricing";
 import MoreFeatures from "./components/MoreFeatures";
 import Career from "./components/Career";
+import { Toaster } from "react-hot-toast";
 
 const Home = () => {
   return (
@@ -52,6 +53,7 @@ const App = () => {
         <Route path="/morefeatures" element={<MoreFeatures />} />
         <Route path="/career" element={<Career />} />
       </Routes>
+      <Toaster />
     </div>
   );
 };
