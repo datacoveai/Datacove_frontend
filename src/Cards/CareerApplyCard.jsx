@@ -37,39 +37,33 @@ const CareerApplyCard = ({ company, title }) => {
     }));
   };
 
-  const handleUpload = async () => {
-    console.log("handleUpload"); // Debugging
-    console.log("email", formData.email);
+  const handleUpload = async (event) => {
+    event.preventDefault();
 
-    if (!file || !formData.email) {
-      alert("Please enter your email and select a file.");
-      return;
-    }
-
+    // Creating FormData to append both text and file data
     const formDataToSend = new FormData();
-    formDataToSend.append("file", file);
     formDataToSend.append("email", formData.email);
     formDataToSend.append("name", formData.name);
     formDataToSend.append("number", formData.number);
-    formDataToSend.append("Company", company);
-    formDataToSend.append("title", title);
 
-    setLoading(true);
-    setOpenModal(false);
+    if (file) {
+      formDataToSend.append("file", file); // Attach the selected file
+    }
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/upload",
+        "https://getform.io/f/axoodnyb",
         formDataToSend,
-        { headers: { "Content-Type": "multipart/form-data" } }
+        {
+          headers: {
+            "Content-Type": "multipart/form-data", // Important for file upload
+          },
+        }
       );
-
-      toast.success(response.data.message);
-      // setOpenModal(false);
-      setLoading(false);
+      console.log(response);
     } catch (error) {
-      console.error("Upload failed:", error);
-      alert("Failed to upload. Try again.");
+      console.error("Error:", error.message);
+      alert("Error submitting form.");
     }
   };
 
@@ -209,3 +203,39 @@ const CareerApplyCard = ({ company, title }) => {
 };
 
 export default CareerApplyCard;
+
+// const handleUpload = async () => {
+//   console.log("handleUpload"); // Debugging
+//   console.log("email", formData.email);
+
+//   if (!file || !formData.email) {
+//     alert("Please enter your email and select a file.");
+//     return;
+//   }
+
+//   const formDataToSend = new FormData();
+//   formDataToSend.append("file", file);
+//   formDataToSend.append("email", formData.email);
+//   formDataToSend.append("name", formData.name);
+//   formDataToSend.append("number", formData.number);
+//   formDataToSend.append("Company", company);
+//   formDataToSend.append("title", title);
+
+//   setLoading(true);
+//   setOpenModal(false);
+
+//   try {
+//     const response = await axios.post(
+//       "http://localhost:5000/upload",
+//       formDataToSend,
+//       { headers: { "Content-Type": "multipart/form-data" } }
+//     );
+
+//     toast.success(response.data.message);
+//     // setOpenModal(false);
+//     setLoading(false);
+//   } catch (error) {
+//     console.error("Upload failed:", error);
+//     alert("Failed to upload. Try again.");
+//   }
+// };

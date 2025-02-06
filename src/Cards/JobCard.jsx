@@ -37,40 +37,36 @@ const JobCard = ({ job }) => {
       [name]: value, // Dynamically update the correct field
     }));
   };
+  const handleUpload = async (event) => {
+    event.preventDefault();
 
-  const handleUpload = async () => {
-    console.log("handleUpload"); // Debugging
-    console.log("email", formData.email);
-
-    if (!file || !formData.email) {
-      alert("Please enter your email and select a file.");
-      return;
-    }
-
+    // Creating FormData to append both text and file data
     const formDataToSend = new FormData();
-    formDataToSend.append("file", file);
     formDataToSend.append("email", formData.email);
     formDataToSend.append("name", formData.name);
     formDataToSend.append("number", formData.number);
-    formDataToSend.append("Company", job.company);
-    formDataToSend.append("title", job.title);
 
-    setLoading(true);
-    setOpenModal(false);
+    if (file) {
+      formDataToSend.append("file", file); // Attach the selected file
+    }
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/upload",
+        "https://getform.io/f/axoodnyb",
         formDataToSend,
-        { headers: { "Content-Type": "multipart/form-data" } }
+        {
+          headers: {
+            "Content-Type": "multipart/form-data", // Important for file upload
+          },
+        }
       );
-
-      toast.success(response.data.message);
-      // setOpenModal(false);
-      setLoading(false);
+      if (response.status === 200) {
+        toast.success("Application Sent");
+        setOpenModal(!openModal);
+      }
     } catch (error) {
-      console.error("Upload failed:", error);
-      alert("Failed to upload. Try again.");
+      console.error("Error:", error.message);
+      alert("Error submitting form.");
     }
   };
 
@@ -118,13 +114,13 @@ const JobCard = ({ job }) => {
         </div>
       </div>
       {openModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 ">
-          <div className="border-white border-[1px] bg-white p-4 rounded-[10px] w-[90%] max-w-md shadow-lg">
-            <h3 className="text-black mb-[15px] font-beVietnam">
+        <div className="fixed inset-0 flex items-center justify-center z-50 shadow-lg backdrop-blur-lg">
+          <div className="border-[violet] border-[1px] bg-[#150c46] p-4 rounded-[10px] w-[90%] max-w-md shadow-lg">
+            <h3 className="text-white mb-[15px] font-beVietnam text-center">
               You are applying for {job.title}
             </h3>
-            <p className="text-black mb-[15px] font-beVietnam">
-              Company: {job.company}
+            <p className="text-white mb-[15px] font-beVietnam text-center">
+              {job.company}
             </p>
             <input
               type="file"
@@ -168,7 +164,7 @@ const JobCard = ({ job }) => {
               />
               <label
                 htmlFor="file-upload"
-                className="cursor-pointer text-center p-2 border rounded-md text-black"
+                className="cursor-pointer text-center p-2 border rounded-md text-white"
               >
                 {imageName ? ` ${imageName}` : "Upload Resume"}
               </label>

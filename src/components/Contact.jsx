@@ -9,19 +9,26 @@ import hero from "../assets/hero-bg.png";
 import Footer from "../Footer/Footer";
 import toast from "react-hot-toast";
 import emailjs from "@emailjs/browser";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+
+import axios from "axios";
 
 // 4MFf344zFLyc
 
 const Contact = () => {
+  const [selected, setSelected] = useState(null);
+  const [phoneNumber, setPhoneNumber] = useState({
+    number: "",
+    countryCode: "",
+    countryName: "",
+  });
+  console.log(phoneNumber.countryName);
+  // const [valid, setValid] = useState(true);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
-    phoneNumber: "",
     field: "",
-    subject: {
-      demo: false,
-      brandIdentity: false,
-    },
     message: "",
   });
 
@@ -44,41 +51,56 @@ const Contact = () => {
     }
   };
 
+  const handlePhoneNumber = (e, value, name) => {
+    // console.log(value?.dialCode);
+    const countryCode = value?.dialCode;
+    const number = e;
+    const countryName = value.name;
+    setPhoneNumber({
+      number: number,
+      countryCode: countryCode,
+      countryName: countryName,
+    });
+  };
+
   const onSubmit = async (event) => {
     event.preventDefault();
 
-    console.log("User Input Data:", formData);
-
-    const serviceId = "service_del2vde";
-    const templateId = "template_zfskluc";
-    const publicKey = "u18j2xzz3UEfrCPB0";
+    const serviceId = "service_sr8tcxi";
+    const templateId = "template_e38eucg";
+    const publicKey = "LQzQ5Wq6NWU_oVEUC";
 
     const templateParams = {
       from_name: formData.fullName,
       from_email: formData.email,
-      to_name: "Datacove",
+      from_country: phoneNumber.countryName,
+      phone_number: phoneNumber.number,
+      field: formData.field,
+      subject: selected,
       message: formData.message,
+      to_name: "DatacoveAI",
     };
 
-    try {
-      emailjs.send(serviceId, templateId, templateParams, publicKey);
-      setFormData({
-        fullName: "",
-        email: "",
-        phoneNumber: "",
-        field: "",
-        subject: {
-          demo: false,
-          brandIdentity: false,
-        },
-        message: "",
+    emailjs
+      .send(serviceId, templateId, templateParams, publicKey)
+      .then((response) => {
+        toast.success("Message sent successfully");
+        setFormData({
+          fullName: "",
+          email: "",
+          phoneNumber: "",
+          field: "",
+          subject: {
+            demo: false,
+            brandIdentity: false,
+          },
+          message: "",
+        });
+      })
+      .catch((error) => {
+        console.error("Error sending email", error);
+        toast.error("Failed to send the message. Please try again.");
       });
-
-      toast.success("Message sent successfully!");
-    } catch (error) {
-      console.error("Error sending email", error);
-      toast.error("Failed to send message. Try again.");
-    }
   };
 
   return (
@@ -177,19 +199,40 @@ const Contact = () => {
                     />
                   </div>
                   <div className="flex flex-col">
-                    <label className="font-beVietnam text-[16px]">
-                      Phone Number
+                    <label className="font-beVietnam text-[16px] flex flex-col ">
+                      Phone:
                     </label>
-                    <div className="flex">
-                      <span className="font-beVietnam text-[16px] border-b  border-[#FFFFFF] ">
-                        +1
-                      </span>
-                      <input
-                        type="number"
-                        value={formData.phoneNumber}
-                        onChange={handleChange}
+
+                    <div className="flex flex-col ">
+                      <PhoneInput
+                        country={"ca"}
+                        value={phoneNumber.number}
+                        onChange={handlePhoneNumber}
+                        inputProps={{ required: true }}
                         name="phoneNumber"
-                        className="bg-inherit border-b w-full border-[#FFFFFF] ml-4 h-9 text-sm placeholder:text-xs focus:outline-none no-arrows "
+                        buttonClass={{
+                          border: "none",
+                        }}
+                        dropdownClass="custom-dropdown-class"
+                        searchClass="custom-search-class"
+                        containerStyle={{
+                          backgroundColor: "inherit",
+                          border: "none",
+                          marginBottom: "10px",
+                          marginTop: "5px",
+                        }}
+                        inputStyle={{
+                          backgroundColor: "inherit",
+                          border: "none",
+                        }}
+                        buttonStyle={{
+                          backgroundColor: "inherit",
+                        }}
+                        dropdownStyle={{
+                          backgroundColor: "inherit",
+                          border: "none",
+                          color: "white",
+                        }}
                       />
                     </div>
                   </div>
@@ -200,9 +243,17 @@ const Contact = () => {
                   Select Subject?
                 </h3>
                 <div className="flex gap-6">
-                  <div className="flex gap-3 ">
+                  <div className="flex gap-3">
                     <input
                       type="checkbox"
+                      checked={selected === "Request a Demo"}
+                      onChange={() =>
+                        setSelected(
+                          selected === "Request a Demo"
+                            ? null
+                            : "Request a Demo"
+                        )
+                      }
                       className="appearance-none border-2 border-[#7214FF] rounded-full w-5 h-5 checked:bg-[#7214FF] checked:border-[#7214FF] focus:outline-none"
                     />
                     <p className="text-[15px]">Request a demo?</p>
@@ -210,6 +261,14 @@ const Contact = () => {
                   <div className="flex gap-3">
                     <input
                       type="checkbox"
+                      checked={selected === "Brand Identity"}
+                      onChange={() =>
+                        setSelected(
+                          selected === "Brand Identity"
+                            ? null
+                            : "Brand Identity"
+                        )
+                      }
                       className="appearance-none border-2 border-[#7214FF] rounded-full w-5 h-5 checked:bg-[#7214FF] checked:border-[#7214FF] focus:outline-none"
                     />
                     <p className="text-[15px]">Brand Identity</p>
@@ -242,3 +301,24 @@ const Contact = () => {
 };
 
 export default Contact;
+
+// const onSubmit = async (e) => {
+//   e.preventDefault();
+
+//   try {
+//     const response = await axios.post(
+//       "http://localhost:5000/contact",
+//       formData,
+//       {
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//       }
+//     );
+
+//     toast.success(response.data.message);
+//   } catch (error) {
+//     console.error("Error:", error);
+//     alert("An error occurred. Please try again.");
+//   }
+// };
