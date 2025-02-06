@@ -217,13 +217,14 @@ const Contact = () => {
                         searchClass="custom-search-class"
                         containerStyle={{
                           backgroundColor: "inherit",
-                          border: "none",
+
                           marginBottom: "10px",
                           marginTop: "5px",
                         }}
                         inputStyle={{
                           backgroundColor: "inherit",
-                          border: "none",
+                          border: "1px solid white",
+                          width: "95%",
                         }}
                         buttonStyle={{
                           backgroundColor: "inherit",
