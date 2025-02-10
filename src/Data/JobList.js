@@ -5,7 +5,7 @@ const jobs = [
     type: "Full Time",
     location: "Onsite",
     salary: "$200K",
-    applicants: 24,
+    cityLocation: "Noida/India",
   },
   {
     title: "UI Designer",
@@ -13,7 +13,7 @@ const jobs = [
     type: "Full Time",
     location: "Onsite",
     salary: "$200K",
-    applicants: 24,
+    cityLocation: "Noida/India",
   },
   {
     title: "Frontend Developer",
@@ -21,7 +21,7 @@ const jobs = [
     type: "Full Time",
     location: "Onsite",
     salary: "$200K",
-    applicants: 24,
+    cityLocation: "Noida/India",
   },
   {
     title: "UX Designer",
@@ -29,7 +29,7 @@ const jobs = [
     type: "Full Time",
     location: "Onsite",
     salary: "$200K",
-    applicants: 24,
+    cityLocation: "Noida/India",
   },
   {
     title: "UX Designer",
@@ -37,7 +37,7 @@ const jobs = [
     type: "Full Time",
     location: "Onsite",
     salary: "$200K",
-    applicants: 24,
+    cityLocation: "Noida/India",
   },
   {
     title: "UX Designer",
@@ -45,7 +45,7 @@ const jobs = [
     type: "Full Time",
     location: "Onsite",
     salary: "$200K",
-    applicants: 24,
+    cityLocation: "Noida/India",
   },
 ];
 

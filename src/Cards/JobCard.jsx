@@ -108,8 +108,8 @@ const JobCard = ({ job }) => {
             Apply
           </button>
           <div className="flex items-center gap-2">
-            <img src={people} alt="Applicants" className="w-6" />
-            <p className="text-white">{job.applicants} applied</p>
+            {/* <img src={people} alt="Applicants" className="w-6" /> */}
+            <p className="text-white">{job.cityLocation} </p>
           </div>
         </div>
       </div>

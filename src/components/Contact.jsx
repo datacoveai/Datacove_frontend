@@ -50,7 +50,6 @@ const Contact = () => {
       }));
     }
   };
-
   const handlePhoneNumber = (e, value, name) => {
     // console.log(value?.dialCode);
     const countryCode = value?.dialCode;
@@ -126,7 +125,7 @@ const Contact = () => {
             <div className="flex flex-col gap-8">
               <div className="flex gap-4 font-beVietnam font-bold">
                 <img src={email} alt="" />
-                <p className="text-[18px]">info@datacove.com</p>
+                <p className="text-[18px]">info@datacove.ai</p>
               </div>
 
               <div className="flex gap-3 font-beVietnam font-bold h-14">
@@ -233,6 +232,7 @@ const Contact = () => {
                           backgroundColor: "inherit",
                           border: "none",
                           color: "white",
+                          height: "70px",
                         }}
                       />
                     </div>
