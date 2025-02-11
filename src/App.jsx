@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Navbar from "./Navbar/Navbar";
 import Footer from "./Footer/Footer";
@@ -14,6 +14,7 @@ import Pricing from "./components/Pricing";
 import MoreFeatures from "./components/MoreFeatures";
 import Career from "./components/Career";
 import { Toaster } from "react-hot-toast";
+import useAppStore from "./store/useAppStore";
 
 const Home = () => {
   return (
@@ -30,6 +31,13 @@ const Home = () => {
 };
 
 const App = () => {
+  const { user, isCheckingAuth, authCheck } = useAppStore();
+
+  console.log("auth user is here : ", user);
+  useEffect(() => {
+    authCheck();
+  }, [authCheck]);
+
   const location = useLocation();
 
   // Define the routes where you want to remove the `home-container`
