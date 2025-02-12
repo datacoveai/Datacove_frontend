@@ -5,7 +5,7 @@ import SideBar from "./SideBar";
 import NavBar from "./NavBar";
 import DashboardContent from "./DashboardContent";
 
-const DashboardNav = () => {
+const Dashboard = () => {
   return (
     <div className="relative bg-[#060b27] h-screen w-full flex">
       {/* Right Image */}
@@ -29,4 +29,4 @@ const DashboardNav = () => {
   );
 };
 
-export default DashboardNav;
+export default Dashboard;

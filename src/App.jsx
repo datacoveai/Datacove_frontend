@@ -15,9 +15,10 @@ import MoreFeatures from "./components/MoreFeatures";
 import Career from "./components/Career";
 import { Toaster } from "react-hot-toast";
 import useAppStore from "./store/useAppStore";
-import DashboardNav from "./dashboard/dashboardNav";
+import DashboardNav from "./dashboard/Dashboard";
 import ProtectedRoute from "./dashboard/ProtectedRoute";
 import { Loader } from "lucide-react";
+import Dashboard from "./dashboard/Dashboard";
 
 const Home = () => {
   return (
@@ -82,7 +83,7 @@ const App = () => {
 
         {/* Protected Route for Dashboard */}
         <Route element={<ProtectedRoute />}>
-          <Route path="/dashboard/:name" element={<DashboardNav />} />
+          <Route path="/dashboard/:name" element={<Dashboard />} />
         </Route>
       </Routes>
 
