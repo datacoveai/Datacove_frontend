@@ -32,7 +32,7 @@ const SignUpPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("DATA", formData);
+    // console.log("DATA", formData);
     if (formData.userType === "individual") {
       indiSignUp({
         name: formData.name,

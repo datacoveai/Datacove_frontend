@@ -186,14 +186,17 @@ const Navbar = () => {
             {/* Dropdown Menu */}
             {dashboarPopup && (
               <div className="absolute right-0 mt-2 w-52 bg-[#060b27] text-white flex flex-col justify-center border border-[#7214FF]  text-sm font-[400] rounded-lg shadow-lg p-2 z-50">
-                <button
-                  className="block w-full text-left px-4 py-2 hover:bg-[#7214FF] hover:rounded-md"
-                  onClick={() => {
-                    setDashboardPopup(false);
-                  }}
-                >
-                  Open Dashboard
-                </button>
+                <Link to={user ? `/dashboard/${user.name}` : "/"}>
+                  <button
+                    className="block w-full text-left px-4 py-2 hover:bg-[#7214FF] hover:rounded-md"
+                    onClick={() => {
+                      setDashboardPopup(false);
+                    }}
+                  >
+                    Open Dashboard
+                  </button>
+                </Link>
+
                 <button
                   className="block w-full text-left px-4 py-2 hover:bg-[#7214FF] hover:rounded-md"
                   onClick={() => {

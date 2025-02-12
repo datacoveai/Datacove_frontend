@@ -2,6 +2,8 @@ import axios from "axios";
 import { create } from "zustand";
 import toast from "react-hot-toast";
 
+const API_BASE_URL = "https://datacove-backend.onrender.com";
+
 const useAppStore = create((set) => ({
   user: null,
 
@@ -23,8 +25,14 @@ const useAppStore = create((set) => ({
     set({ isIndiSigningUp: true });
     try {
       const response = await axios.post(
-        "/api/v1/auth/individual-signup",
-        credentials
+        `${API_BASE_URL}/api/v1/auth/individual-signup`,
+        credentials,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true, // Include credentials for cookies
+        }
       );
       console.log(response);
       set({ user: response.data.user, isIndiSigningUp: false });
@@ -41,8 +49,14 @@ const useAppStore = create((set) => ({
     set({ isOrgSigningUp: true });
     try {
       const response = await axios.post(
-        "/api/v1/auth/organization-signup",
-        credentials
+        `${API_BASE_URL}/api/v1/auth/organization-signup`,
+        credentials,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true, // Include credentials for cookies
+        }
       );
       console.log(response);
       set({ user: response.data.user, isOrgSigningUp: false });
@@ -56,7 +70,11 @@ const useAppStore = create((set) => ({
   login: async (credentials) => {
     set({ isLoggingIn: true });
     try {
-      const response = await axios.post("/api/v1/auth/login", credentials);
+      const response = await axios.post(
+        `${API_BASE_URL}/api/v1/auth/login`,
+        credentials,
+        { withCredentials: true }
+      );
       if (response.status === 200) {
         toast.success("Login Successfully");
       }
@@ -69,7 +87,9 @@ const useAppStore = create((set) => ({
   logout: async () => {
     set({ isLoggingOut: true });
     try {
-      await axios.post("/api/v1/auth/logout");
+      await axios.post(`${API_BASE_URL}/api/v1/auth/logout`, null, {
+        withCredentials: true, // Important to include cookies
+      });
       set({ user: null, isLoggingOut: false });
       toast.success("Logged out successfully");
     } catch (error) {
@@ -80,7 +100,10 @@ const useAppStore = create((set) => ({
   authCheck: async () => {
     set({ isCheckingAuth: true });
     try {
-      const response = await axios.get("/api/v1/auth/authCheck");
+      const response = await axios.get(
+        `${API_BASE_URL}/api/v1/auth/authCheck`,
+        { withCredentials: true }
+      );
       console.log("RESPONSE", response);
       set({ user: response.data.user, isCheckingAuth: false });
     } catch (error) {
