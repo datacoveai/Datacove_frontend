@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { SquareX } from "lucide-react";
 import useAppStore from "../store/useAppStore";
+import { useNavigate } from "react-router-dom";
 const SignUpPage = () => {
   const { closeSignUp, indiSignUp, orgSignUp, login } = useAppStore();
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     userType: "individual",
     name: "",
@@ -51,10 +52,14 @@ const SignUpPage = () => {
       });
       closeSignUp();
     } else {
-      login({
-        email: formData.email,
-        password: formData.password,
-      });
+      login(
+        {
+          email: formData.email,
+          password: formData.password,
+        },
+        navigate
+      );
+
       closeSignUp();
     }
   };

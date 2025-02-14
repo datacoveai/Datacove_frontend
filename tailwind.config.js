@@ -32,6 +32,7 @@ export default {
       },
       fontFamily: {
         beVietnam: ["Be Vietnam", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
       },
       spacing: {
         18: "4.5rem",

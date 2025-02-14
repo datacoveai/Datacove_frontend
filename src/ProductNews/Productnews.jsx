@@ -3,7 +3,7 @@ import blog_image from "../assets/Blog_image.png";
 import blog_image1 from "../assets/Blog_image_1.png";
 import blog_image2 from "../assets/Blog_image_2.png";
 import right from "../assets/right.png";
-
+import { motion } from "framer-motion";
 const Productnews = () => {
   return (
     <div className="mt-24 px-4 md:px-8 lg:px-1 mb-24">
@@ -19,8 +19,12 @@ const Productnews = () => {
       </div>
       <div className="flex flex-col lg:flex-row justify-center lg:justify-between gap-4 mt-8">
         {[blog_image, blog_image2, blog_image1].map((image, index) => (
-          <div
+          <motion.div
             key={index}
+            initial={{ y: "-60%", opacity: 0 }} // Start from top (off-screen) and invisible
+            whileInView={{ y: 0, opacity: 1 }} // Move to normal position and become visible
+            transition={{ duration: 0.8, ease: "easeOut" }} // Smooth transition
+            viewport={{ once: true, delay: 3.6 }} // Animate only once when in view
             className="w-full lg:w-[50%] bg-[#262d52] bg-opacity-40 p-4 border border-[#4e4e4e] border-opacity-20 rounded-md"
           >
             <div
@@ -52,7 +56,7 @@ const Productnews = () => {
                 <img src={right} alt="" height={14} width={14} />
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

@@ -1,11 +1,12 @@
 import React from "react";
 import image from "../assets/hero-image.png";
 import hero from "../assets/hero-bg.png";
+import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
     <div>
-      <div className="flex justify-center items-center flex-col mt-28 sm:mt-10 lg:mt-36 px-4">
+      <div className="flex justify-center items-center flex-col mt-[12rem] sm:mt-10 lg:mt-36 px-4 my-auto">
         <h1 className="font-[700] text-2xl sm:text-3xl md:text-4xl lg:text-[48px] text-center p-8 bg-gradient-to-b from-[#F6F6F7] to-[#7E808F] bg-clip-text text-transparent">
           AI-Driven Automated Contract Analysis
         </h1>
@@ -22,14 +23,24 @@ const Hero = () => {
           Get a Demo
         </button>
       </div>
+      <motion.div
+        initial={{ scale: 0.5, opacity: 0 }} // Start small and invisible
+        animate={{ scale: 1, opacity: 1 }} // Grow to full size and become visible
+        transition={{ duration: 0.8, ease: "easeOut" }} // Smooth effect
+        className="relative flex justify-center items-center mt-4 sm:mt-6 lg:mt-8 px-4 w-full"
+      >
+        {/* Animated Glow Effect */}
+        {/* <div className="absolute w-[80%] sm:w-[60%] md:w-[70%] lg:w-[90%] h-[60%] md:h-[80%] rounded-full  opacity-50 blur-[80px] animate-pulse"></div> */}
 
-      <div className="flex justify-center items-center mt-4 sm:mt-6 lg:mt-8 px-4">
+        {/* Image */}
+
         <img
           src={image}
           alt="AI-driven Contract Analysis"
-          className="w-full sm:w-[60%] md:w-[80%] lg:w-[100%] object-contain filter hue-rotate-190 saturate-250 brightness-100"
+          className="w-[full] sm:w-[90%] md:w-[80%] lg:w-[100%] h-[full] object-cover relative"
         />
-      </div>
+      </motion.div>
+
       <img
         src={hero}
         alt=""

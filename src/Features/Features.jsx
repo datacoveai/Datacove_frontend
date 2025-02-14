@@ -7,7 +7,7 @@ import int_bg_2 from "../assets/integratedBg_2.png";
 import int_bg from "../assets/integratedBg.png";
 import int_bg3 from "../assets/bg-three.png";
 import int_bg4 from "../assets/bg-four.png";
-
+import { motion } from "framer-motion";
 const Features = () => {
   return (
     <div className="mt-10 p-4">
@@ -26,15 +26,22 @@ const Features = () => {
 
       {/* Feature Section 1 */}
       <div className="mt-10">
-        <div className="flex flex-col lg:flex-row justify-between bg-[#282D45] bg-opacity-40 border border-gray-600 border-opacity-20 rounded-[4px]">
+        <motion.div
+          initial={{ y: -50, opacity: 0 }} // Start above and invisible
+          whileInView={{ y: 0, opacity: 1 }} // Animate when in view
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.5 }} // Triggers when 20% of section is visible
+          className="flex flex-col lg:flex-row justify-between bg-[#282D45] bg-opacity-40 border border-gray-600 border-opacity-20 rounded-[4px]"
+        >
+          {/* Left Content Section */}
           <div className="relative w-full h-auto lg:w-[60%] px-6 py-8 md:px-12">
             <h3 className="text-[18px] md:text-[24px] font-bold font-beVietnam">
-              Unleashing AIs Potential <br /> in your Documents
+              Unleashing AI’s Potential <br /> in Your Documents
             </h3>
             <p className="text-[12px] md:text-[14px] text-[#8F9BB7] mt-3 text-justify">
               Datacove integrates advanced AI capabilities directly into
               Microsoft Word. With a single click, lawyers can open relevant
-              documents in Word, while continuously accessing Datacoves AI
+              documents in Word while continuously accessing Datacove’s AI
               analysis through a sidebar.
             </p>
             <p className="text-[12px] md:text-[14px] text-[#8F9BB7] mt-3 text-justify">
@@ -44,12 +51,18 @@ const Features = () => {
               transfer of documents.
             </p>
           </div>
-          <img
+
+          {/* Right Image Section */}
+          <motion.img
             src={icon2}
             alt="Feature Illustration"
+            initial={{ y: -50, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+            viewport={{ once: true, amount: 0.7 }} // Triggers when 20% of section is visible
             className="h-auto w-full lg:w-[40%] object-contain p-6"
           />
-        </div>
+        </motion.div>
       </div>
 
       <button className="border border-[#1F1F1F] rounded-3xl px-4 py-2 mt-5 text-sm">
@@ -59,8 +72,14 @@ const Features = () => {
       {/* Feature Section 2 */}
       <div className="mt-6 flex flex-col lg:flex-row gap-6">
         {/* Card 1 */}
-        <div className="w-full lg:w-[40%] bg-[#282D45] bg-opacity-40 border border-gray-600 border-opacity-20 rounded-[4px]">
-          <div className=" relative w-full h-auto p-4 md:p-6">
+        <motion.div
+          initial={{ x: "-70%", opacity: 0 }} // Start from the left (off-screen) and invisible
+          whileInView={{ x: 0, opacity: 1 }} // Move to its normal position and become visible
+          transition={{ duration: 1, ease: "easeOut" }} // Smooth transition
+          viewport={{ once: true, delay: 0.9 }} // Animate once when in view
+          className="w-full lg:w-[40%] bg-[#282D45] bg-opacity-40 border border-gray-600 border-opacity-20 rounded-[4px]"
+        >
+          <div className="relative w-full h-auto p-4 md:p-6">
             <img
               src={icon3}
               alt="Integrated Tools"
@@ -89,10 +108,16 @@ const Features = () => {
               assigned tasks, task sizes, and completion status.
             </p>
           </div>
-        </div>
+        </motion.div>
 
         {/* Card 2 */}
-        <div className="w-full lg:w-[60%] bg-[#282D45] bg-opacity-40 border border-gray-600 border-opacity-20 rounded-[4px]">
+        <motion.div
+          initial={{ x: "70%", opacity: 0 }} // Start from the right (off-screen) and invisible
+          whileInView={{ x: 0, opacity: 1 }} // Move to its normal position and become visible
+          transition={{ duration: 1, ease: "easeOut" }} // Smooth transition
+          viewport={{ once: true, delay: 0.9 }} // Animate once when in view
+          className="w-full lg:w-[60%] bg-[#282D45] bg-opacity-40 border border-gray-600 border-opacity-20 rounded-[4px]"
+        >
           <div className="relative w-full h-auto p-4 md:p-8">
             <img
               src={int_bg3}
@@ -119,7 +144,7 @@ const Features = () => {
               />
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Call to Action */}

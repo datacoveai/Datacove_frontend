@@ -2,7 +2,7 @@ import axios from "axios";
 import { create } from "zustand";
 import toast from "react-hot-toast";
 
-const API_BASE_URL = "https://datacove-backend.onrender.com";
+const API_BASE_URL = "http://localhost:5000";
 
 const useAppStore = create((set) => ({
   user: null,
@@ -67,8 +67,9 @@ const useAppStore = create((set) => ({
       set({ isOrgSigningUp: false, user: null });
     }
   },
-  login: async (credentials) => {
+  login: async (credentials, navigate) => {
     set({ isLoggingIn: true });
+
     try {
       const response = await axios.post(
         `${API_BASE_URL}/api/v1/auth/login`,
@@ -79,6 +80,7 @@ const useAppStore = create((set) => ({
         toast.success("Login Successfully");
       }
       set({ user: response.data.user, isLoggingIn: false });
+      navigate(`/dashboard/${response.data.user.name}`);
     } catch (error) {
       set({ isLoggingIn: false, user: null });
       toast.error(error.response.data.message || "Login Failed");
@@ -109,6 +111,24 @@ const useAppStore = create((set) => ({
     } catch (error) {
       set({ isCheckingAuth: false, user: null });
       // toast.error(error.response.data.message || "An error occurred");
+    }
+  },
+  saveNote: async (credential) => {
+    console.log("credentials", credential);
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/api/v1/dashboard/addNotes`,
+        credential,
+        { withCredentials: true }
+      );
+      console.log("RESPONSE", response);
+      set({ user: response.data.user });
+      if (response.status === 200) {
+        toast.success("Note saved successfully");
+      }
+    } catch (error) {
+      toast.error(error.response.data.message || "Note can 't be saved");
+      set({ isIndiSigningUp: false, user: null });
     }
   },
 }));

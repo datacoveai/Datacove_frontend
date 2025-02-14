@@ -7,21 +7,12 @@ import DashboardContent from "./DashboardContent";
 
 const Dashboard = () => {
   return (
-    <div className="relative bg-[#060b27] h-screen w-full flex">
-      {/* Right Image */}
-      <img
-        src={right}
-        alt="Right Board"
-        className="absolute left-0 top-1/2 transform -translate-y-1/2 "
-      />
-      {/* Left Image */}
-      <img
-        src={left}
-        alt="Left Board"
-        className="absolute right-0 top-1/2 transform -translate-y-1/2"
-      />
+    <div className="flex min-h-screen bg-[#060b27]">
+      {/* Fixed Sidebar */}
       <SideBar />
-      <div className="flex-grow">
+
+      {/* Main Content Area */}
+      <div className="flex-1 ml-72 flex flex-col  bg-[#060b27]">
         <NavBar />
         <DashboardContent />
       </div>
