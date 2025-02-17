@@ -12,7 +12,7 @@ const Dashboard = () => {
       <SideBar />
 
       {/* Main Content Area */}
-      <div className="flex-1 ml-72 flex flex-col  bg-[#060b27]">
+      <div className="flex-1 ml-[20rem] flex flex-col  bg-[#060b27]">
         <NavBar />
         <DashboardContent />
       </div>

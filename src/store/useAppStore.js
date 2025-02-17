@@ -131,6 +131,34 @@ const useAppStore = create((set) => ({
       set({ isIndiSigningUp: false, user: null });
     }
   },
+  sendFile: async (credential) => {
+    // Send the userId
+
+    console.log("CREDENTIAL", credential);
+
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/api/v1/upload/uploadFile`,
+        credential,
+
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        },
+        { withCredentials: true }
+      );
+      console.log("RESPONSE", response);
+
+      if (response.status === 200) {
+        toast.success("File uploaded");
+      } else {
+        console.error("Upload failed:", response.data.message);
+      }
+    } catch (error) {
+      console.error("Error uploading file:", error);
+    }
+  },
 }));
 
 export default useAppStore;

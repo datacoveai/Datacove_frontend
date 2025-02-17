@@ -5,17 +5,37 @@ import draft from "../assets/Dashboard/draft.png";
 import question from "../assets/Dashboard/question.png";
 import case_img from "../assets/Dashboard/case.png";
 import { ArrowBigDown, ArrowDown, ChevronRight, Send } from "lucide-react";
-import { FileUp } from "lucide-react";
+import { FileUp, X } from "lucide-react";
 import { Editor } from "@tinymce/tinymce-react";
 import useAppStore from "../store/useAppStore";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const DashboardContent = () => {
-  const { user, saveNote } = useAppStore();
+  const { user, saveNote, sendFile } = useAppStore();
+  const [uploadedFiles, setUploadedFiles] = useState([]);
   // console.log("USER", user);
   const [noteData, setNoteData] = useState({
     NoteTitle: "",
     NoteContent: "",
   });
+
+  const handleFileUpload = (e) => {
+    const files = e.target.files;
+    if (files.length + uploadedFiles.length <= 50) {
+      setUploadedFiles((prevFiles) => [...prevFiles, ...Array.from(files)]);
+    } else {
+      alert("You can only upload up to 50 files.");
+    }
+  };
+
+  console.log("File", uploadedFiles);
+
+  const removeFile = (fileName) => {
+    setUploadedFiles((prevFiles) =>
+      prevFiles.filter((file) => file.name !== fileName)
+    );
+  };
 
   const handleEditorChange = (content, editor) => {
     setNoteData({
@@ -41,6 +61,21 @@ const DashboardContent = () => {
       content: noteData.NoteContent,
     };
     saveNote(credential);
+  };
+
+  const handleUpload = async () => {
+    if (uploadedFiles.length === 0) {
+      console.error("No files selected.");
+      return;
+    }
+
+    // Create a credential object to send all files
+    const credential = {
+      files: uploadedFiles, // Send the whole array of files
+      userId: user._id,
+    };
+
+    sendFile(credential); // Call the function to send all files
   };
 
   return (
@@ -182,12 +217,61 @@ const DashboardContent = () => {
         </div>
       </div>
       {/* Upload Document Section */}
-      <div className="bg-[#0B213F] p-8 mt-[2rem] rounded-[1rem] flex justify-center items-center flex-col border-dashed border-white border-2 space-y-5 h-52">
-        <div>
-          <FileUp size={70} />
-        </div>
-        <div className="text-lg font-[500] font-beVietnam">
-          Upload a document
+      <div className="flex space-x-5">
+        {/* Upload Section */}
+        <div className="bg-[#0B213F] p-3 rounded-[1rem] flex justify-center items-center gap-2 border-dashed border-white border-2 space-y-5 h-[26rem] w-full cursor-pointer">
+          <label className="w-full h-full">
+            <input
+              type="file"
+              className="hidden"
+              onChange={handleFileUpload}
+              multiple
+            />
+            <div className="bg-[#060B27] w-full flex justify-center items-center flex-col gap-2 rounded-[1rem] h-full">
+              <FileUp size={70} />
+              <div className="text-lg font-[500] font-beVietnam">
+                Upload up to 50 documents by drag and drop
+              </div>
+            </div>
+          </label>
+
+          {/* File Preview Section */}
+          {uploadedFiles.length > 0 && (
+            <div className="bg-[#0B213F] p-4 flex flex-col justify-between h-full rounded-[1rem] w-[40%]  max-h-[400px]">
+              <div className="flex flex-col gap-2 h-full">
+                <h3 className="text-white text-md mb-3">Document Upload</h3>
+                {/* document div */}
+                <div className="space-y-2 overflow-y-auto h-auto">
+                  {uploadedFiles.map((file, index) => (
+                    <div
+                      key={index}
+                      className="bg-[#060B27] p-2 rounded-[10px] flex items-center   justify-between px-[1rem] py-[10px]"
+                    >
+                      <div className="flex items-center space-x-3">
+                        <FileUp size={24} />
+                        <div className="flex flex-col gap-1">
+                          <p className="text-white text-sm">{file.name}</p>
+                          <p className="text-gray-400 text-[12px]">
+                            {(file.size / (1024 * 1024)).toFixed(2)} MB
+                          </p>
+                        </div>
+                      </div>
+                      <button onClick={() => removeFile(file.name)}>
+                        <X size={20} className="text-white cursor-pointer" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+
+                <button
+                  onClick={handleUpload}
+                  className="p-2 mt-2 border border-white text-white bg-[#060B27] border-opacity-40 rounded-md"
+                >
+                  Upload
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
       {/* Ask a question with jurisdiction */}
