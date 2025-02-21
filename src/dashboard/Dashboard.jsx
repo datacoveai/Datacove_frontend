@@ -4,6 +4,7 @@ import right from "../assets/Dashboard/board-2.png";
 import SideBar from "./SideBar";
 import NavBar from "./NavBar";
 import DashboardContent from "./DashboardContent";
+import { Outlet } from "react-router-dom";
 
 const Dashboard = () => {
   return (
@@ -12,9 +13,9 @@ const Dashboard = () => {
       <SideBar />
 
       {/* Main Content Area */}
-      <div className="flex-1 ml-[20rem] flex flex-col  bg-[#060b27]">
+      <div className="flex-1 ml-[23rem] mr-[2rem] gap-8 flex flex-col my-[1rem]  bg-[#060b27]">
         <NavBar />
-        <DashboardContent />
+        <Outlet />
       </div>
     </div>
   );

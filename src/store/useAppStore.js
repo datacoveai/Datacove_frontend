@@ -80,7 +80,7 @@ const useAppStore = create((set) => ({
         toast.success("Login Successfully");
       }
       set({ user: response.data.user, isLoggingIn: false });
-      navigate(`/dashboard/${response.data.user.name}`);
+      navigate(`/dashboard/${response.data.user.name.replace(/\s+/g, "")}`);
     } catch (error) {
       set({ isLoggingIn: false, user: null });
       toast.error(error.response.data.message || "Login Failed");

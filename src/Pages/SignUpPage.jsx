@@ -90,7 +90,7 @@ const SignUpPage = () => {
               onClick={() => {
                 handleUserType("individual");
                 setFormData((prev) => ({
-                  ...prev, // Keep userType unchanged
+                  ...prev,
                   name: "",
                   email: "",
                   phoneNumber: "",
@@ -110,7 +110,7 @@ const SignUpPage = () => {
               onClick={() => {
                 handleUserType("company");
                 setFormData((prev) => ({
-                  ...prev, // Keep userType unchanged
+                  ...prev,
                   name: "",
                   email: "",
                   phoneNumber: "",
@@ -133,7 +133,7 @@ const SignUpPage = () => {
               onClick={() => {
                 handleUserType("Login");
                 setFormData((prev) => ({
-                  ...prev, // Keep userType unchanged
+                  ...prev,
                   name: "",
                   email: "",
                   phoneNumber: "",

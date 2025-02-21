@@ -5,6 +5,7 @@ import twitter from "../assets/twitter.png";
 import instagram from "../assets/instagram.png";
 import linkdin from "../assets/linkedin.png";
 import logo from "../assets/logo.png";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -36,13 +37,11 @@ const Footer = () => {
           </div>
 
           {/* Pages Section */}
-          <div className="flex flex-col justify-between text-[#8F9BB7] flex-grow mt-8 md:mt-0 md:ml-18 items-center md:items-start gap-4">
-            <h4 className="text-[15px] font-bold font-beVietnam">Pages</h4>
+          <div className="flex flex-col justify-between text-[#8F9BB7] flex-grow mt-8 md:mt-0 md:ml-18 items-center md:items-start gap-4 cursor-pointer">
+            <h4 className="text-[15px] font-bold font-beVietnam ">Pages</h4>
             <div>Home</div>
             <div>About</div>
             <div>Contact</div>
-            <div>Blog</div>
-            <div>Blog Post</div>
             <div>Pricing Single</div>
           </div>
 
@@ -51,7 +50,7 @@ const Footer = () => {
             <h4 className="text-[15px] font-bold font-beVietnam">Links</h4>
             <div>Features</div>
             <div>Careers</div>
-            <div>Careers Single</div>
+
             <div>Request a demo</div>
             <div>Login</div>
             <div>Sign up</div>
@@ -60,16 +59,12 @@ const Footer = () => {
           {/* Utility Pages Section */}
           <div className="flex flex-col justify-between text-[#8F9BB7] flex-grow mt-8 md:mt-0 md:ml-18 items-center md:items-start gap-4">
             <div>
-              <h4 className="text-[15px] font-bold font-beVietnam">
-                Utility Pages
-              </h4>
+              <h4 className="text-[15px] font-bold font-beVietnam">Support</h4>
             </div>
 
-            <div>Style guide</div>
-            <div>Password Protected</div>
-            <div>404 not found</div>
-            <div>Licenses</div>
-            <div>Changelog</div>
+            <Link to={"/faqs"}>FAQ'S</Link>
+            <Link to={"/privacypolicy"}>Privacy Policy</Link>
+            <Link to={"/termsandcondtion"}>Terms and condition</Link>
           </div>
         </div>
 

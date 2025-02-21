@@ -9,12 +9,13 @@ const ProtectedRoute = () => {
     return <Navigate to="/" replace />;
   }
 
-  const correctPath = `/dashboard/${user.name}`;
-  if (location.pathname !== correctPath) {
-    return <Navigate to={correctPath} replace />;
+  // Allow ALL subroutes under `/dashboard/${user.name}` instead of forcing redirection
+  const baseDashboardPath = `/dashboard/${user.name}`;
+  if (!location.pathname.startsWith(baseDashboardPath)) {
+    return <Navigate to={baseDashboardPath} replace />;
   }
 
-  return <Outlet />;
+  return <Outlet />; // Allows rendering of child routes (history, documents, etc.)
 };
 
 export default ProtectedRoute;

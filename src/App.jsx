@@ -19,6 +19,12 @@ import DashboardNav from "./dashboard/Dashboard";
 import ProtectedRoute from "./dashboard/ProtectedRoute";
 import { Loader } from "lucide-react";
 import Dashboard from "./dashboard/Dashboard";
+import Faq from "./Pages/Faq";
+import PrivacyPolicy from "./Pages/PrivacyPolicy";
+import TermsAndCondition from "./Pages/TermsAndCondition";
+import DashBoardHome from "./dashboard/DashBoardHome";
+import DocsHistory from "./dashboard/DocsHistory";
+import DashboardLayout from "./dashboard/DashboardLayout";
 
 const Home = () => {
   return (
@@ -80,10 +86,16 @@ const App = () => {
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/morefeatures" element={<MoreFeatures />} />
         <Route path="/career" element={<Career />} />
+        <Route path="/faqs" element={<Faq />} />
+        <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+        <Route path="/termsandcondtion" element={<TermsAndCondition />} />
 
         {/* Protected Route for Dashboard */}
         <Route element={<ProtectedRoute />}>
-          <Route path="/dashboard/:name" element={<Dashboard />} />
+          <Route path="/dashboard/:name" element={<DashboardLayout />}>
+            <Route index element={<DashBoardHome />} />
+            <Route path="history/documents" element={<DocsHistory />} />
+          </Route>
         </Route>
       </Routes>
 
