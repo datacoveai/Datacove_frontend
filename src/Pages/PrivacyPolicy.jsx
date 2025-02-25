@@ -9,11 +9,11 @@ const PrivacyPolicy = () => {
         <div className="flex flex-col gap-4">
           <h1 className="text-xl font-[500]">Privacy Policy</h1>
           <p className="text-white/60 text-md">
-            At Royal Badminton Club, we are committed to protecting the privacy
-            and confidentiality of our website visitors and members. This
-            Privacy Policy outlines how we collect, use, disclose, and safeguard
-            your personal information when you visit our website or engage with
-            our services.
+            At Datacove AI, we are committed to protecting the privacy and
+            confidentiality of our website visitors and members. This Privacy
+            Policy outlines how we collect, use, disclose, and safeguard your
+            personal information when you visit our website or engage with our
+            services.
           </p>
         </div>
 
@@ -51,12 +51,12 @@ const PrivacyPolicy = () => {
         <div>
           <h2 className="text-xl font-[500] mb-4">Photographs and Videos</h2>
           <p className="text-white/60 text-md">
-            By participating in activities at Royal Badminton Club, you consent
-            to the use of your photographs and videos for promotional purposes.
-            We may use these images and videos on our website, social media
-            channels, marketing materials, and other promotional activities. If
-            you have any concerns about the use of your images or videos, please
-            contact our management team.
+            By participating in activities at Datacove AI, you consent to the
+            use of your photographs and videos for promotional purposes. We may
+            use these images and videos on our website, social media channels,
+            marketing materials, and other promotional activities. If you have
+            any concerns about the use of your images or videos, please contact
+            our management team.
           </p>
         </div>
 
@@ -114,10 +114,10 @@ const PrivacyPolicy = () => {
             Privacy Policy or the handling of your personal information, please
             contact us at{" "}
             <a
-              href="mailto:info@royalbadmintonclub.com"
+              href="mailto:info@datacove.ai"
               className="text-blue-400 underline"
             >
-              info@royalbadmintonclub.com
+              info@datacove.ai
             </a>
             . We are here to assist you and address any issues promptly and
             effectively.
@@ -126,7 +126,8 @@ const PrivacyPolicy = () => {
             Any legal notice should be mailed to:
           </p>
           <p className="text-white/60 text-md font-bold">
-            40 Holtby Ave, Unit 6, Brampton, ON, L6X 2M1
+            08 Triveni Tower 3rd Floor, Central Avenue, GandhiPutla, Itwari,
+            Nagpur 440002, India.
           </p>
         </div>
 
