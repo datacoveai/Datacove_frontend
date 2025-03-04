@@ -90,9 +90,10 @@ const useAppStore = create((set) => ({
   logout: async () => {
     set({ isLoggingOut: true });
     try {
-      await axios.post(`${API_BASE_URL}/api/v1/auth/logout`, {
+      const response = await axios.post(`${API_BASE_URL}/api/v1/auth/logout`, {
         withCredentials: true,
       });
+      console.log(response);
       set({ user: null, isLoggingOut: false });
       toast.success("Logged out successfully");
     } catch (error) {
