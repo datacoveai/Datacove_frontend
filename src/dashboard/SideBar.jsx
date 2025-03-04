@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import logo from "../assets/logo.png";
 import { Plus, X } from "lucide-react";
 import { Search } from "lucide-react";
-import brain from "../assets/Dashboard/brain.png";
-import guide from "../assets/Dashboard/guide.png";
-import gallery from "../assets/Dashboard/gallery.png";
-import pin from "../assets/Dashboard/pin.png";
+
 import useAppStore from "../store/useAppStore";
 import { LogOut } from "lucide-react";
 import { ChevronDown } from "lucide-react";
@@ -17,11 +14,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MailPlus } from "lucide-react";
 import { FileClock } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
+import { NotebookPen } from "lucide-react";
+import { FolderOpenDot } from "lucide-react";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 const SideBar = () => {
-  const { name } = useParams();
   const [activeIndex, setActiveIndex] = useState(null);
   const [isHistoryOpen, setHistoryOpen] = useState(false);
+  const [email, setEmail] = useState("");
+
   const { user, logout } = useAppStore();
 
   const items = [
@@ -39,18 +41,55 @@ const SideBar = () => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
+  const handleInvite = async () => {
+    if (!email) {
+      toast.error("Please enter an email.");
+      return;
+    }
+
+    if (email === user.email) {
+      toast.error("You cannot invite yourself!");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/dashboard/invite-client",
+        {
+          userId: user._id,
+          email: email,
+        },
+        { withCredentials: true }
+      );
+
+      // Display the message from the backend response
+      toast.success(response.data.message);
+      setEmail(""); // Clear the input field
+    } catch (error) {
+      if (error.response) {
+        // Handle different status codes and show the appropriate message
+        toast.error(error.response.data.message || "Something went wrong.");
+      } else {
+        // Handle cases where there's no response from the server
+        toast.error("Network error or server is unreachable.");
+      }
+    }
+  };
+
   return (
     <div className="w-[22rem] fixed top-0 left-0 h-screen bg-[#1A114A] p-4 flex flex-col">
       {/* Logo */}
       <div className="bg-gradient-to-b from-[#F6F6F7] to-[#7E808F] bg-clip-text text-transparent font-bold text-2xl mb-8">
-        DATACOVE AI
+        <Link to={`/dashboard/${user.name}`}>DATACOVE AI</Link>
       </div>
 
       {/* Action Buttons */}
       <div className="space-y-3 mb-8">
-        <button className="w-full flex items-center gap-2 text-white/80 hover:text-white p-3 rounded-lg hover:bg-white/5 transition-colors">
-          <Plus className="w-5 h-5" /> New Chat
-        </button>
+        <Link>
+          <button className="w-full flex items-center gap-2 text-white/80 hover:text-white p-3 rounded-lg hover:bg-white/5 transition-colors">
+            <Plus className="w-5 h-5" /> New Chat
+          </button>
+        </Link>
         <div className="flex items-center gap-2 text-white/80 border border-white/10 p-3 rounded-lg">
           <Search className="w-5 h-5" /> Search
         </div>
@@ -108,6 +147,38 @@ const SideBar = () => {
         ))}
       </div>
 
+      {/* invite client */}
+      {user && user.userType !== "client" && (
+        <div className="mt-6 flex items-center gap-2 mb-4">
+          <input
+            type="email"
+            placeholder="Enter client email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              console.log("Updated email:", e.target.value);
+            }}
+            className="w-full py-2 px-3 border border-violet-400/20 rounded-md bg-white/5 text-white placeholder-gray-400 focus:outline-none focus:border-violet-400/40 focus:ring-1 focus:ring-violet-400/40 transition-all duration-200"
+          />
+          <button
+            onClick={handleInvite}
+            className="p-2 bg-[#251761] hover:bg-[#2f1d7a] rounded-xl transition-colors"
+          >
+            <MailPlus className="w-5 h-5 text-green-500" />
+          </button>
+        </div>
+      )}
+
+      {user.userType !== "client" && (
+        <div className="flex items-center gap-2 text-white/80 hover:text-white border border-white/10 p-3 rounded-lg hover:bg-white/5 transition-colors mb-4">
+          <Link to={`/dashboard/${user?.name}/project/projects`}>
+            <button className="flex items-center gap-2 ">
+              Projects <FolderOpenDot className="w-5 h-5 text-yellow-400" />
+            </button>
+          </Link>
+        </div>
+      )}
+
       {/* History Section */}
       <div className="flex flex-col gap-2 text-white/80 hover:text-white border border-white/10 p-3 rounded-lg hover:bg-white/5 transition-colors mb-[1rem]">
         {/* Header with Animated Icon */}
@@ -134,21 +205,30 @@ const SideBar = () => {
           transition={{ duration: 0.3, ease: "easeInOut" }}
           className="overflow-hidden"
         >
+          {user.userType !== "client" && (
+            <div className="flex items-center gap-2 py-2 text-sm">
+              <Link
+                to={`/dashboard/${user?.name}/history/documents`}
+                className="flex items-center gap-2 "
+              >
+                <FileClock className="h-5 w-5 text-blue-600" /> Docs History
+              </Link>
+            </div>
+          )}
+
           <div className="flex items-center gap-2 py-2 text-sm">
             <Link
-              to={`/dashboard/${user?.name}/history/documents`}
+              to={`/dashboard/${user?.name}/history/notes`}
               className="flex items-center gap-2 "
             >
-              <FileClock className="h-5 w-5 text-blue-600" /> Docs History
+              <NotebookPen className="h-5 w-5 text-blue-600" /> Notes History
             </Link>
           </div>
         </motion.div>
       </div>
 
       {/* Logout Button */}
-      <button className="flex items-center gap-2 text-white/80 hover:text-white border border-white/10 p-3 rounded-lg hover:bg-white/5 transition-colors mb-[1rem]">
-        <MailPlus className="w-5 h-5 text-green-500" /> Invite
-      </button>
+
       <button
         className="flex items-center gap-2 text-white/80 hover:text-white border border-white/10 p-3 rounded-lg hover:bg-white/5 transition-colors"
         onClick={logout}

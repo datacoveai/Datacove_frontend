@@ -8,6 +8,7 @@ import SignUpPage from "../Pages/SignUpPage";
 import { CircleUserRound } from "lucide-react";
 const Navbar = () => {
   const { isSignUpOpen, openSignUp, user, logout } = useAppStore();
+  // console.log("USER_NAME", user.name);
   const [dashboarPopup, setDashboardPopup] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => {
@@ -64,6 +65,19 @@ const Navbar = () => {
       >
         <div className="flex flex-col gap-4 p-5 lg:flex-row lg:p-0 lg:gap-8 text-gray-400 text-[12px]">
           <NavLink
+            to="/"
+            className={({ isActive }) =>
+              `cursor-pointer hover:text-white ${
+                isActive
+                  ? "text-white underline decoration-[white] underline-offset-[10px]"
+                  : ""
+              }`
+            }
+          >
+            Home
+          </NavLink>
+
+          <NavLink
             to="/morefeatures"
             onClick={toggleMenu}
             className={({ isActive }) =>
@@ -101,18 +115,7 @@ const Navbar = () => {
           >
             Career
           </NavLink>
-          <NavLink
-            to="/about-us"
-            className={({ isActive }) =>
-              `cursor-pointer hover:text-white ${
-                isActive
-                  ? "text-white underline decoration-[white] underline-offset-[10px]"
-                  : ""
-              }`
-            }
-          >
-            About Us
-          </NavLink>
+
           <NavLink
             to="/contact-us"
             onClick={toggleMenu}

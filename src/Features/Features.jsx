@@ -73,10 +73,10 @@ const Features = () => {
       <div className="mt-6 flex flex-col lg:flex-row gap-6">
         {/* Card 1 */}
         <motion.div
-          initial={{ x: "-70%", opacity: 0 }} // Start from the left (off-screen) and invisible
-          whileInView={{ x: 0, opacity: 1 }} // Move to its normal position and become visible
-          transition={{ duration: 1, ease: "easeOut" }} // Smooth transition
-          viewport={{ once: true, delay: 0.9 }} // Animate once when in view
+          initial={{ y: "-70%", opacity: 0 }} // Start from above
+          whileInView={{ y: 0, opacity: 1 }} // Move to its normal position
+          transition={{ duration: 1, ease: "easeOut" }}
+          viewport={{ once: true, delay: 0.9 }}
           className="w-full lg:w-[40%] bg-[#282D45] bg-opacity-40 border border-gray-600 border-opacity-20 rounded-[4px]"
         >
           <div className="relative w-full h-auto p-4 md:p-6">
@@ -112,10 +112,10 @@ const Features = () => {
 
         {/* Card 2 */}
         <motion.div
-          initial={{ x: "70%", opacity: 0 }} // Start from the right (off-screen) and invisible
-          whileInView={{ x: 0, opacity: 1 }} // Move to its normal position and become visible
-          transition={{ duration: 1, ease: "easeOut" }} // Smooth transition
-          viewport={{ once: true, delay: 0.9 }} // Animate once when in view
+          initial={{ y: "70%", opacity: 0 }} // Start from below
+          whileInView={{ y: 0, opacity: 1 }} // Move to its normal position
+          transition={{ duration: 1, ease: "easeOut" }}
+          viewport={{ once: true, delay: 0.9 }}
           className="w-full lg:w-[60%] bg-[#282D45] bg-opacity-40 border border-gray-600 border-opacity-20 rounded-[4px]"
         >
           <div className="relative w-full h-auto p-4 md:p-8">

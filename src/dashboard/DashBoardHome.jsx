@@ -8,29 +8,49 @@ import case_img from "../assets/Dashboard/case.png";
 import { ArrowBigDown, ArrowDown, ChevronRight, Send } from "lucide-react";
 import { FileUp, X } from "lucide-react";
 import { Editor } from "@tinymce/tinymce-react";
-
+import chat from "../assets/Dashboard/chat.png";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const DashBoardHome = () => {
-  const { user, saveNote, sendFile } = useAppStore();
+  const { user, saveNote, sendFile, clientFile } = useAppStore();
   const [uploadedFiles, setUploadedFiles] = useState([]);
   // console.log("USER", user);
   const [noteData, setNoteData] = useState({
     NoteTitle: "",
     NoteContent: "",
   });
+  const [forClient, setForClient] = useState(false);
 
   const handleFileUpload = (e) => {
-    const files = e.target.files;
+    const allowedTypes = [
+      "application/pdf",
+      "image/jpeg",
+      "image/png",
+      "text/plain",
+      "application/msword",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    ];
+
+    const files = Array.from(e.target.files);
+    const invalidFiles = files.filter(
+      (file) => !allowedTypes.includes(file.type)
+    );
+
+    if (invalidFiles.length > 0) {
+      alert("Only PDF, JPG, PNG, TXT, and Word files are allowed.");
+      return;
+    }
+
     if (files.length + uploadedFiles.length <= 50) {
-      setUploadedFiles((prevFiles) => [...prevFiles, ...Array.from(files)]);
+      setUploadedFiles((prevFiles) => [...prevFiles, ...files]);
     } else {
       alert("You can only upload up to 50 files.");
     }
   };
 
-  console.log("File", uploadedFiles);
+  // console.log("File", uploadedFiles);
 
   const removeFile = (fileName) => {
     setUploadedFiles((prevFiles) =>
@@ -38,17 +58,19 @@ const DashBoardHome = () => {
     );
   };
 
-  const handleEditorChange = (content, editor) => {
+  const handleEditorChange = (e) => {
     setNoteData({
       ...noteData,
-      NoteContent: content, // Capture editor content
+      NoteContent: e.target.value, // Capture editor content
     });
+    console.log("content", e.target.value);
   };
   const handleTitleChange = (e) => {
     setNoteData({
       ...noteData,
       NoteTitle: e.target.value, // Update NoteTitle when typing
     });
+    console.log("title", e.target.value);
   };
 
   const handleSubmit = async (e) => {
@@ -62,6 +84,10 @@ const DashBoardHome = () => {
       content: noteData.NoteContent,
     };
     saveNote(credential);
+    setNoteData({
+      NoteTitle: "",
+      NoteContent: "",
+    });
   };
 
   const handleUpload = async () => {
@@ -70,13 +96,24 @@ const DashBoardHome = () => {
       return;
     }
 
-    // Create a credential object to send all files
+    // Create a user credential object to send all files
     const credential = {
       files: uploadedFiles, // Send the whole array of files
       userId: user._id,
+      forClient,
     };
 
-    sendFile(credential); // Call the function to send all files
+    //credential for client acc
+    const clientCredential = {
+      files: uploadedFiles,
+      userId: user._id,
+    };
+
+    if (user.userType === "client") {
+      clientFile(clientCredential);
+    } else {
+      sendFile(credential); // Call the function to send all files
+    }
   };
   return (
     <>
@@ -100,30 +137,43 @@ const DashBoardHome = () => {
             {/* Grid Container */}
             <div className="grid grid-cols-2 gap-6 h-full">
               {[
-                { title: "Ask a Question?", icon: bag },
+                { title: "Ask a Question?", icon: bag, to: "ai" },
                 { title: "Create a draft", icon: draft },
-                { title: "Summarize a case", icon: case_img },
-                { title: "Ask a question?", icon: question },
+                {
+                  title: "Summarize a case",
+                  icon: case_img,
+                  to: "summarizedocument",
+                },
+                {
+                  title: "Chat with client.",
+                  icon: chat,
+                  to: "client",
+                },
               ].map((item, index) => (
-                <div
+                <Link
                   key={index}
                   className="flex items-center justify-center h-64 gap-4 border-2 border-white/20 border-dotted p-6 rounded-2xl hover:border-white/80 transition-colors"
+                  to={`/dashboard/${user.name}/chat/${item.to}`}
                 >
-                  <img src={item.icon} alt={item.title} className="w-12 h-12" />{" "}
+                  <img
+                    src={item.icon}
+                    alt={item.title}
+                    className="w-12 h-12 text-white"
+                  />{" "}
                   {/* Use <img> tag to display the icon */}
                   <p className="bg-gradient-to-b from-[#F6F6F7] to-[#7E808F] bg-clip-text text-transparent font-medium">
                     {item.title}
                   </p>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
         </div>
 
         {/* Right Section - Ask Now */}
-        <div className="w-[40rem] h-full justify-center my-auto bottom-0">
+        <div className="w-[28rem] h-full justify-center my-auto bottom-0">
           <form
-            className="bg-[#1A114A] p-4 rounded-2xl"
+            className="bg-[#1A114A] p-4 rounded-2xl h-full"
             onSubmit={handleSubmit}
           >
             <h3 className="text-white font-bold text-lg font-beVietnam mb-4">
@@ -134,91 +184,52 @@ const DashBoardHome = () => {
               <h3 className="text-white  font-beVietnam mb-4">
                 <input
                   type="text"
-                  placeholder="Post Title"
+                  placeholder="Note Title"
                   name="NoteTitle"
                   value={noteData.NoteTitle}
                   onChange={handleTitleChange} // Handle the change event
-                  className="bg-inherit w-full border border-white/80 p-2 text-sm text-white rounded-[1rem]"
+                  className="bg-inherit w-full border border-white/40 p-2 text-sm text-white rounded-md focus:outline-none"
                 />
               </h3>
-              <Editor
-                onEditorChange={handleEditorChange}
-                apiKey="anpfmeb7fv27df7te7i43st6vp48mar7eu77wisqeiww3gz9"
-                init={{
-                  plugins: [
-                    // Core editing features
-                    "anchor",
-                    "autolink",
-                    "charmap",
-                    "codesample",
-                    "emoticons",
-                    "image",
-                    "link",
-                    "lists",
-                    "media",
-                    "searchreplace",
-                    // "table",
-                    "visualblocks",
-                    "wordcount",
-                    // Your account includes a free trial of TinyMCE premium features
-                    // Try the most popular premium features until Feb 28, 2025:
-                    "checklist",
-                    "mediaembed",
-                    "casechange",
-                    "export",
-                    "formatpainter",
-                    "pageembed",
-                    "a11ychecker",
-                    "tinymcespellchecker",
-                    "permanentpen",
-                    "powerpaste",
-                    "advtable",
-                    "advcode",
-                    "editimage",
-                    "advtemplate",
-
-                    "mentions",
-                    "tinycomments",
-                    "tableofcontents",
-                    "footnotes",
-                    "mergetags",
-                    "autocorrect",
-                    "typography",
-                    "inlinecss",
-                    "markdown",
-                    "importword",
-                    "exportword",
-                    "exportpdf",
-                  ],
-                  toolbar:
-                    "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
-                  tinycomments_mode: "embedded",
-                  tinycomments_author: "Author name",
-                  mergetags_list: [
-                    { value: "First.Name", title: "First Name" },
-                    { value: "Email", title: "Email" },
-                  ],
-                }}
-                initialValue="Welcome to DATACOVE!"
+              <textarea
+                type="text"
+                placeholder="Type your note here..."
+                onChange={handleEditorChange}
+                className="w-full h-[40vh] bg-inherit border border-violet-500/40 rounded-md text-start focus:outline-none p-2"
               />
             </div>
-            <div className="flex justify-between font-beVietnam mt-[1rem] gap-4">
-              <button className="bg-green-500 font-[500] text-white rounded-[1.5rem] p-4 border border-white/90">
+            <div className="flex  font-beVietnam mt-[1rem] gap-4 w-full">
+              <button className="bg-green-500 font-[500] text-white rounded-[1.5rem] w-full p-4 border border-white/60">
                 Save Note
               </button>
-              <button className="bg-[#060b27] font-[500] text-white rounded-[1.5rem] p-4 border border-white/90">
+              {/* <button className="bg-[#060b27] font-[500] text-white rounded-[1.5rem] p-4 border border-white/90">
                 Edit Note
               </button>
               <button className="bg-red-700 font-[500] text-white rounded-[1.5rem] p-4">
                 Delete Note
-              </button>
+              </button> */}
             </div>
           </form>
         </div>
       </div>
       {/* Upload Document Section */}
+      {user.userType !== "client" && (
+        <div className="flex items-center space-x-3">
+          <span className="text-white text-md">For Client:</span>
+          <label className="relative inline-flex items-center cursor-pointer">
+            <input
+              type="checkbox"
+              className="sr-only peer"
+              checked={forClient}
+              onChange={() => setForClient((prev) => !prev)}
+            />
+            <div className="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:bg-blue-500 after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-5"></div>
+          </label>
+        </div>
+      )}
+
+      {/* Upload Section */}
       <div className="flex space-x-5">
-        {/* Upload Section */}
         <div className="bg-[#0B213F] p-3 rounded-[1rem] flex justify-center items-center gap-2 border-dashed border-white border-2 space-y-5 h-[26rem] w-full cursor-pointer">
           <label className="w-full h-full">
             <input
@@ -297,3 +308,66 @@ const DashBoardHome = () => {
 };
 
 export default DashBoardHome;
+
+{
+  /* <Editor
+                onEditorChange={handleEditorChange}
+                apiKey="anpfmeb7fv27df7te7i43st6vp48mar7eu77wisqeiww3gz9"
+                init={{
+                  plugins: [
+                    // Core editing features
+                    "anchor",
+                    "autolink",
+                    "charmap",
+                    "codesample",
+                    "emoticons",
+                    "image",
+                    "link",
+                    "lists",
+                    "media",
+                    "searchreplace",
+                    // "table",
+                    "visualblocks",
+                    "wordcount",
+                    // Your account includes a free trial of TinyMCE premium features
+                    // Try the most popular premium features until Feb 28, 2025:
+                    // "checklist",
+                    // "mediaembed",
+                    // "casechange",
+                    // // "export",
+                    // "formatpainter",
+                    // "pageembed",
+                    // "a11ychecker",
+                    // "tinymcespellchecker",
+                    // "permanentpen",
+                    // "powerpaste",
+                    // "advtable",
+                    // "advcode",
+                    // "editimage",
+                    // "advtemplate",
+
+                    // "mentions",
+                    // "tinycomments",
+                    // "tableofcontents",
+                    // "footnotes",
+                    // "mergetags",
+                    // "autocorrect",
+                    // "typography",
+                    // "inlinecss",
+                    // "markdown",
+                    // "importword",
+                    // "exportword",
+                    // "exportpdf",
+                  ],
+                  toolbar:
+                    "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
+                  tinycomments_mode: "embedded",
+                  tinycomments_author: "Author name",
+                  mergetags_list: [
+                    { value: "First.Name", title: "First Name" },
+                    { value: "Email", title: "Email" },
+                  ],
+                }}
+                initialValue="Welcome to DATACOVE!"
+              /> */
+}

@@ -145,6 +145,12 @@ body {
   padding-right: 3%;
 }
 
+html,
+body {
+  overflow: auto !important;
+  height: auto !important;
+}
+
 .gradient-border {
   position: relative; /* Uncomment if needed for specific layout */
   border: 2px solid transparent;

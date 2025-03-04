@@ -25,6 +25,16 @@ import TermsAndCondition from "./Pages/TermsAndCondition";
 import DashBoardHome from "./dashboard/DashBoardHome";
 import DocsHistory from "./dashboard/DocsHistory";
 import DashboardLayout from "./dashboard/DashboardLayout";
+import ForgetPassword from "./Pages/ForgetPassword";
+import NotesHistory from "./dashboard/NotesHistory";
+import SummarizeDocument from "./dashboard/SummarizeDocument";
+import ChatWithAI from "./dashboard/DashboardPages/ChatWithAI";
+import ChatWithClient from "./dashboard/DashboardPages/ChatWithClient";
+import ResetPassword from "./Pages/ResetPassword";
+import AcceptInvitation from "./dashboard/DashboardPages/AcceptInvitation";
+import Clients from "./dashboard/DashboardPages/Clients";
+import CreateProject from "./dashboard/Projects/CreateProject";
+import SingleProject from "./dashboard/Projects/SingleProject";
 
 const Home = () => {
   return (
@@ -60,6 +70,7 @@ const App = () => {
   }
 
   const isDashboardRoute = location.pathname.startsWith("/dashboard/");
+  const isForgetPasswordRoute = location.pathname === "/forgetpassword";
 
   // Define the routes where you want to remove the `home-container`
   const noContainerRoutes = [
@@ -75,32 +86,56 @@ const App = () => {
     location.pathname.startsWith(route.replace(":name", ""))
   );
 
+  const isNoNavbar = isDashboardRoute || isForgetPasswordRoute;
+
   return (
-    <div className={isNoContainer ? "" : "home-container"}>
-      {/* Show Navbar only if NOT on the dashboard route */}
-      {!isDashboardRoute && <Navbar />}
+    <>
+      {" "}
+      <div className={isNoContainer ? "" : "home-container"}>
+        {/* Show Navbar only if NOT on the dashboard route */}
+        {!isNoNavbar && <Navbar />}
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/contact-us" element={<Contact />} />
-        <Route path="/pricing" element={<Pricing />} />
-        <Route path="/morefeatures" element={<MoreFeatures />} />
-        <Route path="/career" element={<Career />} />
-        <Route path="/faqs" element={<Faq />} />
-        <Route path="/privacypolicy" element={<PrivacyPolicy />} />
-        <Route path="/termsandcondtion" element={<TermsAndCondition />} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/contact-us" element={<Contact />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/morefeatures" element={<MoreFeatures />} />
+          <Route path="/career" element={<Career />} />
+          <Route path="/faqs" element={<Faq />} />
+          <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+          <Route path="/termsandcondtion" element={<TermsAndCondition />} />
+          <Route path="/forgetpassword" element={<ForgetPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
+          <Route path="/join" element={<AcceptInvitation />} />
 
-        {/* Protected Route for Dashboard */}
-        <Route element={<ProtectedRoute />}>
-          <Route path="/dashboard/:name" element={<DashboardLayout />}>
-            <Route index element={<DashBoardHome />} />
-            <Route path="history/documents" element={<DocsHistory />} />
+          {/* Protected Route for Dashboard */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/dashboard/:name" element={<DashboardLayout />}>
+              <Route index element={<DashBoardHome />} />
+              <Route path="history/documents" element={<DocsHistory />} />
+              <Route path="history/notes" element={<NotesHistory />} />
+              <Route
+                path="chat/summarizedocument"
+                element={<SummarizeDocument />}
+              />
+              <Route path="chat/ai" element={<ChatWithAI />} />
+              <Route path="chat/client" element={<ChatWithClient />} />
+              <Route
+                path="client/invitations-and-clients"
+                element={<Clients />}
+              />
+              <Route path="project/projects" element={<CreateProject />} />
+              <Route
+                path="project/projects/:name"
+                element={<SingleProject />}
+              />
+            </Route>
           </Route>
-        </Route>
-      </Routes>
+        </Routes>
 
-      <Toaster />
-    </div>
+        <Toaster />
+      </div>
+    </>
   );
 };
 

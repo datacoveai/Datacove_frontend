@@ -8,6 +8,7 @@ import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
+  const year = new Date().getFullYear();
   return (
     <div className="mb-24">
       <div
@@ -73,12 +74,27 @@ const Footer = () => {
 
         {/* Footer Section */}
         <div className="flex justify-between mt-4 mb-8 flex-col md:flex-row items-center md:items-center">
-          <p className="text-[#8F9BB7] text-[12px]">Copyright @ product</p>
+          <p className="text-[#8F9BB7] text-[12px]">
+            © Copyright {year}, All Rights Reserved by Datacove Inc.
+          </p>
           <div className="flex gap-4 mt-4 md:mt-0">
-            <img src={facebook} alt="Facebook" />
+            <a
+              href="https://www.facebook.com/datacoveai"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={facebook} alt="Facebook" />
+            </a>
+
             <img src={instagram} alt="Instagram" />
             <img src={twitter} alt="Twitter" />
-            <img src={linkdin} alt="LinkedIn" />
+            <a
+              href=" https://www.linkedin.com/company/datacoveai"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={linkdin} alt="LinkedIn" />
+            </a>
           </div>
         </div>
       </div>

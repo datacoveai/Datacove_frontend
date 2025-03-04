@@ -1,49 +1,65 @@
 const faqData = {
   generalIssues: [
     {
-      question: "What is the duration of a badminton court booking?",
+      question: "Can I book a demo before purchasing the AI?",
       answer:
-        "Royal Badminton court bookings start from a minimum of 1 hour and can be reserved for up to 4 hours, providing flexibility to accommodate various playing preferences and schedules.",
+        "Yes! We offer a free demo so you can explore how our AI works before making a purchase. Book your demo now to experience its capabilities firsthand.",
     },
     {
-      question: "Can I rent badminton equipment at Royal Badminton?",
+      question: "What features does the AI offer?",
       answer:
-        "Absolutely! We offer convenient equipment rental services to ensure you have everything you need for an enjoyable game. From quality rackets to shuttlecocks, we've got you covered, allowing you to dive into the badminton experience hassle-free.",
+        "Our AI provides advanced automation, real-time insights, and smart decision-making tools tailored to your needs. It helps optimize workflows, analyze data, and enhance efficiency.",
     },
     {
-      question: "Are there any coaching services available at Royal Badminton?",
+      question: "Is the AI available for individuals and businesses?",
       answer:
-        "Certainly! At Royal Badminton, we take pride in offering exceptional coaching services tailored to players of all levels. Our experienced coaches, with over 10 years of expertise and a background in national-level play, provide top-notch training. We have the coaching program to elevate your game.",
+        "Absolutely! Our AI solutions cater to both individuals and businesses. Whether you need personal AI assistance or enterprise-level automation, we have the right plan for you.",
     },
     {
-      question:
-        "Can I join badminton leagues or tournaments at Royal Badminton?",
+      question: "Do I need technical skills to use this AI?",
       answer:
-        "Absolutely! Royal Badminton is your gateway to thrilling competition. Throughout the year, we organize multiple tournaments and leagues, creating opportunities for players to showcase their skills and enhance their game.",
+        "Not at all! Our AI is designed to be user-friendly, requiring no coding or technical expertise. Simply follow the intuitive interface to get started.",
     },
   ],
 
-  bookingFaqs: [
+  pricingAndSubscription: [
     {
-      question: "What is the duration of a badminton court booking?",
+      question: "What are the pricing plans for the AI?",
       answer:
-        "Royal Badminton court bookings start from a minimum of 1 hour and can be reserved for up to 4 hours, providing flexibility to accommodate various playing preferences and schedules.",
+        "We offer flexible pricing plans based on your usage needs. Choose from monthly, yearly, or enterprise plans. Visit our pricing page for detailed information.",
     },
     {
-      question: "Can i rent badminton equipment at Royal Badminton?",
+      question: "Is there a free trial available?",
       answer:
-        "Absolutely! We offer convenient equipment rental services to ensure you have everything you need for an enjoyable game. From quality rackets to shuttlecocks, we've got you covered, allowing you to dive into the badminton experience hassle-free.",
+        "Yes! You can book a free demo to test our AI before subscribing. This allows you to explore its features and see how it fits your requirements.",
     },
     {
-      question: "Are there any coaching services available at Royal Badminton?",
+      question: "Can I upgrade or downgrade my plan later?",
       answer:
-        "Certainly! At Royal Badminton, we take pride in offering exceptional coaching services tailored to players of all levels. Our experienced coaches, with over 10 years of expertise and a background in national-level play, provide top-notch training. We have the coaching program to elevate your game.",
+        "Of course! You can upgrade or downgrade your subscription at any time based on your evolving needs. Our support team can assist you with the transition.",
     },
     {
-      question:
-        "Can i join badminton leagues or tournaments at Royal Badminton?",
+      question: "What payment methods do you accept?",
       answer:
-        "Absolutely! Royal Badminton is your gateway to thrilling competition. Throughout the year, we organize multiple tournaments and leagues, creating opportunities for players to showcase their skills and enhance their game.",
+        "We accept major credit/debit cards, PayPal, and other secure online payment options. For enterprise clients, custom payment arrangements can be made.",
+    },
+  ],
+
+  supportAndSecurity: [
+    {
+      question: "Is my data safe with your AI?",
+      answer:
+        "Yes! We prioritize security with end-to-end encryption and strict data privacy policies. Your information is never shared or used without your consent.",
+    },
+    {
+      question: "Do you provide customer support?",
+      answer:
+        "Absolutely! Our support team is available 24/7 to assist with any questions or issues. You can reach us via email, live chat, or phone.",
+    },
+    {
+      question: "Can I integrate this AI with my existing systems?",
+      answer:
+        "Yes! Our AI is designed for seamless integration with various platforms and tools. Whether it’s CRM, automation software, or analytics tools, we support smooth integration.",
     },
   ],
 };
