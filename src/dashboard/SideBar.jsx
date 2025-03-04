@@ -19,6 +19,8 @@ import { FolderOpenDot } from "lucide-react";
 import toast from "react-hot-toast";
 import axios from "axios";
 
+const API_PRODUCTION_URL = "https://datacove-backend.onrender.com";
+
 const SideBar = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [isHistoryOpen, setHistoryOpen] = useState(false);
@@ -54,7 +56,7 @@ const SideBar = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/v1/dashboard/invite-client",
+        `${API_PRODUCTION_URL}/api/v1/dashboard/invite-client`,
         {
           userId: user._id,
           email: email,

@@ -4,6 +4,10 @@ import useAppStore from "../store/useAppStore";
 import { Link, useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import axios from "axios";
+
+const API_PRODUCTION_URL = "https://datacove-backend.onrender.com";
+// const API_BASE_URL = "http://localhost:5000";
+
 export const AppProvider = ({ children }) => {
   const navigate = useNavigate();
   const { closeSignUp, indiSignUp, orgSignUp, login, user } = useAppStore();
@@ -119,7 +123,7 @@ export const AppProvider = ({ children }) => {
     const fetchUserDocs = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/v1/dashboard/get-userDocs",
+          `${API_PRODUCTION_URL}/api/v1/dashboard/get-userDocs`,
 
           { withCredentials: true }
         );
@@ -139,7 +143,7 @@ export const AppProvider = ({ children }) => {
     const fetchClientDocs = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/v1/dashboard/get-clientDocs",
+          `${API_PRODUCTION_URL}/api/v1/dashboard/get-clientDocs`,
           { withCredentials: true }
         );
 
