@@ -35,6 +35,7 @@ import AcceptInvitation from "./dashboard/DashboardPages/AcceptInvitation";
 import Clients from "./dashboard/DashboardPages/Clients";
 import CreateProject from "./dashboard/Projects/CreateProject";
 import SingleProject from "./dashboard/Projects/SingleProject";
+import ReportPage from "./dashboard/DashboardPages/ReportPage";
 
 const Home = () => {
   return (
@@ -125,6 +126,7 @@ const App = () => {
                 element={<Clients />}
               />
               <Route path="project/projects" element={<CreateProject />} />
+              <Route path="reports/report" element={<ReportPage />} />
               <Route
                 path="project/projects/:name"
                 element={<SingleProject />}

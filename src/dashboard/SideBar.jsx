@@ -19,7 +19,7 @@ import { FolderOpenDot } from "lucide-react";
 import toast from "react-hot-toast";
 import axios from "axios";
 
-const API_PRODUCTION_URL = "https://datacove-backend.onrender.com";
+const API_PRODUCTION_URL = "http://localhost:5000";
 
 const SideBar = () => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -170,6 +170,12 @@ const SideBar = () => {
           </button>
         </div>
       )}
+
+      <div className="flex items-center gap-2 text-white/80 hover:text-white border border-white/10 p-3 rounded-lg hover:bg-white/5 transition-colors mb-4">
+        <Link to={`/dashboard/${user?.name}/reports/report`}>
+          <button className="flex items-center gap-2 ">Reports</button>
+        </Link>
+      </div>
 
       {user.userType !== "client" && (
         <div className="flex items-center gap-2 text-white/80 hover:text-white border border-white/10 p-3 rounded-lg hover:bg-white/5 transition-colors mb-4">
