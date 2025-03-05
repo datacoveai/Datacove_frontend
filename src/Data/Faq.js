@@ -1,65 +1,105 @@
 const faqData = {
-  generalIssues: [
+  general: [
     {
-      question: "Can I book a demo before purchasing the AI?",
+      question: "What is DataCove AI?",
       answer:
-        "Yes! We offer a free demo so you can explore how our AI works before making a purchase. Book your demo now to experience its capabilities firsthand.",
+        "DataCove AI is an AI-powered document intelligence platform that automates document validation, compliance checks, and strategic insights using agentic workflows.",
     },
     {
-      question: "What features does the AI offer?",
+      question: "How does DataCove AI work?",
       answer:
-        "Our AI provides advanced automation, real-time insights, and smart decision-making tools tailored to your needs. It helps optimize workflows, analyze data, and enhance efficiency.",
+        "Users upload documents, and DataCove AI processes them using multiple AI agents, extracting insights, summarizing content, checking compliance, and generating structured reports.",
     },
     {
-      question: "Is the AI available for individuals and businesses?",
+      question: "What industries can use DataCove AI?",
       answer:
-        "Absolutely! Our AI solutions cater to both individuals and businesses. Whether you need personal AI assistance or enterprise-level automation, we have the right plan for you.",
+        "DataCove AI is designed for legal professionals, supply chain managers, recruiters, real estate agents, and other industries requiring automated document intelligence.",
+    },
+  ],
+
+  privacyAndSecurity: [
+    {
+      question: "How is my data secured?",
+      answer:
+        "All documents are stored securely using AES-256 encryption and processed in compliance with GDPR and PIPEDA. Personally identifiable information (PII) is automatically redacted before being processed by AI models.",
     },
     {
-      question: "Do I need technical skills to use this AI?",
+      question: "Do you sell or share my data?",
       answer:
-        "Not at all! Our AI is designed to be user-friendly, requiring no coding or technical expertise. Simply follow the intuitive interface to get started.",
+        "No, DataCove AI does not sell, share, or rent user data. Your documents remain private and are only processed within our secure environment.",
+    },
+    {
+      question: "What happens to my documents after processing?",
+      answer:
+        "Documents are automatically deleted from our servers within [Insert Duration] unless users choose to retain them. AI-generated reports are stored securely for retrieval.",
+    },
+  ],
+
+  technologyAndAiModels: [
+    {
+      question: "What AI models does DataCove use?",
+      answer:
+        "DataCove AI leverages cutting-edge language models such as OpenAI GPT-4, Claude AI, and domain-specific NLP models, ensuring accurate and compliant document processing.",
+    },
+    {
+      question: "Can I choose an AI agent for my specific needs?",
+      answer:
+        "Yes! DataCove AI allows users to select AI agents tailored to different domains, such as Legal AI, Supply Chain AI, and Recruitment AI, ensuring relevant document analysis.",
     },
   ],
 
   pricingAndSubscription: [
     {
-      question: "What are the pricing plans for the AI?",
+      question: "How does the subscription model work?",
       answer:
-        "We offer flexible pricing plans based on your usage needs. Choose from monthly, yearly, or enterprise plans. Visit our pricing page for detailed information.",
+        "We offer a Basic (Free), Business ($49.99/month), and Enterprise ($499.99/month) plan. Each plan includes varying levels of document processing, AI insights, and collaboration features.",
     },
     {
       question: "Is there a free trial available?",
       answer:
-        "Yes! You can book a free demo to test our AI before subscribing. This allows you to explore its features and see how it fits your requirements.",
+        "Yes, DataCove AI offers a free trial with limited functionality so users can test the platform before upgrading to a paid plan.",
     },
     {
-      question: "Can I upgrade or downgrade my plan later?",
+      question: "How do I cancel my subscription?",
       answer:
-        "Of course! You can upgrade or downgrade your subscription at any time based on your evolving needs. Our support team can assist you with the transition.",
-    },
-    {
-      question: "What payment methods do you accept?",
-      answer:
-        "We accept major credit/debit cards, PayPal, and other secure online payment options. For enterprise clients, custom payment arrangements can be made.",
+        "Users can cancel their subscription at any time through their account settings. Cancellations take effect at the end of the billing cycle.",
     },
   ],
 
-  supportAndSecurity: [
+  usageAndCollaboration: [
     {
-      question: "Is my data safe with your AI?",
+      question: "Can I share AI-generated reports with my clients?",
       answer:
-        "Yes! We prioritize security with end-to-end encryption and strict data privacy policies. Your information is never shared or used without your consent.",
+        "Yes, DataCove AI provides options to securely share reports with clients via email or a protected link.",
     },
     {
-      question: "Do you provide customer support?",
+      question:
+        "What if my document contains sensitive legal or financial data?",
       answer:
-        "Absolutely! Our support team is available 24/7 to assist with any questions or issues. You can reach us via email, live chat, or phone.",
+        "Our system automatically redacts sensitive information before AI processing, ensuring compliance and confidentiality.",
     },
     {
-      question: "Can I integrate this AI with my existing systems?",
+      question: "What file types are supported?",
       answer:
-        "Yes! Our AI is designed for seamless integration with various platforms and tools. Whether it’s CRM, automation software, or analytics tools, we support smooth integration.",
+        "DataCove AI supports PDFs, DOCX, TXT, and image formats for OCR-based text extraction.",
+    },
+    {
+      question: "How long does it take for AI to process documents?",
+      answer:
+        "Processing time varies based on document length and complexity but generally takes a few seconds to a couple of minutes.",
+    },
+    {
+      question: "Can multiple users collaborate on the same case?",
+      answer:
+        "Yes, Business and Enterprise users can invite team members or clients to collaborate on document analysis and reports.",
+    },
+  ],
+
+  supportAndContact: [
+    {
+      question: "How do I contact support?",
+      answer:
+        "For support, email us at info@datacove.ai or visit our Help Center for FAQs and troubleshooting guides.",
     },
   ],
 };
