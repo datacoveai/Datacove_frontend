@@ -36,9 +36,14 @@ const useAppStore = create((set) => ({
         }
       );
       console.log(response);
-      set({ user: response.data.user, isIndiSigningUp: false });
+      if (response.data.user.is_email_verified === true) {
+        set({ user: response.data.user, isIndiSigningUp: false });
+      }
+
       if (response.status === 201) {
-        toast.success("Account created successfully, now you can login.");
+        toast.success(
+          "Account created successfully, Check mail for verfication"
+        );
       }
     } catch (error) {
       //console.log(error)

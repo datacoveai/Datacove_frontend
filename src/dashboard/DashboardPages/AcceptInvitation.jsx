@@ -53,7 +53,7 @@ const AcceptInvitation = () => {
 
       setSuccess("Invitation accepted successfully! Redirecting...");
       setTimeout(() => {
-        window.location.href = "/dashboard"; // Redirect after success
+        window.location.href = `/`; // Redirect after success
       }, 2000);
     } catch (err) {
       setError(err.response?.data?.message || "Something went wrong.");

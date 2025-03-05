@@ -19,6 +19,8 @@ export const AppProvider = ({ children }) => {
     phoneNumber: "",
     password: "",
     companyName: "",
+    isVerified: false,
+    otp: "",
   });
   const [invitations, setInvitations] = useState([]);
   const [clients, setClients] = useState([]);
@@ -72,7 +74,6 @@ export const AppProvider = ({ children }) => {
         phone: formData.phoneNumber,
         password: formData.password,
       });
-      closeSignUp();
     } else if (formData.userType === "company") {
       orgSignUp({
         name: formData.name,
@@ -81,7 +82,6 @@ export const AppProvider = ({ children }) => {
         organizationName: formData.companyName,
         password: formData.password,
       });
-      closeSignUp();
     } else {
       login(
         {
@@ -90,9 +90,18 @@ export const AppProvider = ({ children }) => {
         },
         navigate
       );
-
-      closeSignUp();
     }
+    setFormData({
+      userType: "individual",
+      name: "",
+      email: "",
+      phoneNumber: "",
+      password: "",
+      companyName: "",
+      isVerified: false,
+      otp: "",
+    });
+    closeSignUp();
   };
 
   // useEffect(() => {

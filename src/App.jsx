@@ -36,6 +36,7 @@ import Clients from "./dashboard/DashboardPages/Clients";
 import CreateProject from "./dashboard/Projects/CreateProject";
 import SingleProject from "./dashboard/Projects/SingleProject";
 import ReportPage from "./dashboard/DashboardPages/ReportPage";
+import VerifyOtp from "./Pages/VerifyOtp";
 
 const Home = () => {
   return (
@@ -108,6 +109,7 @@ const App = () => {
           <Route path="/forgetpassword" element={<ForgetPassword />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/join" element={<AcceptInvitation />} />
+          <Route path="/verify-email" element={<VerifyOtp />} />
 
           {/* Protected Route for Dashboard */}
           <Route element={<ProtectedRoute />}>
