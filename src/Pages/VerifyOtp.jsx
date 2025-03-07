@@ -4,17 +4,20 @@ import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import useAppStore from "../store/useAppStore";
 
-const API_PRODUCTION_URL = "https://datacove-backend.onrender.com";
+const API_PRODUCTION_URL = "http://localhost:5000";
 
 const VerifyOtp = () => {
   const navigate = useNavigate();
-  const [otp, setOtp] = useState("");
+  const { openSignUp } = useAppStore();
   const [isLoading, setIsLoading] = useState(false);
   const [isResending, setIsResending] = useState(false);
   const [message, setMessage] = useState("");
   const [searchParams] = useSearchParams();
   const email = searchParams.get("email");
+  const otpFromUrl = searchParams.get("otp");
+  const [otp, setOtp] = useState(otpFromUrl);
 
   const handleVerify = async () => {
     if (!otp) {
@@ -32,6 +35,7 @@ const VerifyOtp = () => {
       if (response.status === 200) {
         toast.success(response.data.message);
         navigate("/");
+        openSignUp();
       }
     } catch (error) {
       const errorMessage =

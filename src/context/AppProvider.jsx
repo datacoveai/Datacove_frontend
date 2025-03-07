@@ -4,6 +4,7 @@ import useAppStore from "../store/useAppStore";
 import { Link, useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 // const API_PRODUCTION_URL = "https://datacove-backend.onrender.com";
 const API_BASE_URL = "http://localhost:5000";
@@ -12,6 +13,7 @@ export const AppProvider = ({ children }) => {
   const navigate = useNavigate();
   const { closeSignUp, indiSignUp, orgSignUp, login, user } = useAppStore();
   const [notes, setNotes] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     userType: "individual",
     name: "",
@@ -26,6 +28,7 @@ export const AppProvider = ({ children }) => {
   const [clients, setClients] = useState([]);
   const [userDocs, setUserDocs] = useState();
   const [clientDocs, setClientDocs] = useState([]);
+  const [signupMessage, setSignupMessage] = useState();
   const [singleProject, setSingleProject] = useState();
 
   // useEffect(() => {
@@ -64,33 +67,44 @@ export const AppProvider = ({ children }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log("DATA", formData);
-    if (formData.userType === "individual") {
-      indiSignUp({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phoneNumber,
-        password: formData.password,
-      });
-    } else if (formData.userType === "company") {
-      orgSignUp({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phoneNumber,
-        organizationName: formData.companyName,
-        password: formData.password,
-      });
-    } else {
-      login(
-        {
+    setIsLoading(true);
+    try {
+      if (formData.userType === "individual") {
+        const message = await indiSignUp({
+          name: formData.name,
           email: formData.email,
+          phone: formData.phoneNumber,
           password: formData.password,
-        },
-        navigate
-      );
+        });
+        setSignupMessage(message);
+      } else if (formData.userType === "company") {
+        const message = await orgSignUp({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phoneNumber,
+          organizationName: formData.companyName,
+          password: formData.password,
+        });
+        setSignupMessage(message);
+      } else {
+        const message = await login(
+          {
+            email: formData.email,
+            password: formData.password,
+          },
+          navigate
+        );
+        closeSignUp();
+        // setSignupMessage(message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setIsLoading(false);
     }
+
     setFormData({
       userType: "individual",
       name: "",
@@ -101,7 +115,7 @@ export const AppProvider = ({ children }) => {
       isVerified: false,
       otp: "",
     });
-    closeSignUp();
+    // closeSignUp();
   };
 
   // useEffect(() => {
@@ -183,6 +197,8 @@ export const AppProvider = ({ children }) => {
         setSingleProject,
         userDocs,
         clientDocs,
+        signupMessage,
+        isLoading,
       }}
     >
       {children}

@@ -56,7 +56,7 @@ const InvitationsTable = ({ data }) => {
   }
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto h-full">
       <table className="w-full">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (

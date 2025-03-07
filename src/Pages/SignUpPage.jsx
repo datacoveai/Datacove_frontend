@@ -1,13 +1,23 @@
 import React, { useContext, useState } from "react";
-import { SquareX } from "lucide-react";
+import { Loader, SquareX } from "lucide-react";
 import useAppStore from "../store/useAppStore";
 import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
+import PhoneInput from "react-phone-input-2";
 
 const SignUpPage = () => {
   const { closeSignUp } = useAppStore();
-  const { formData, setFormData, handleChange, handleUserType, handleSubmit } =
-    useContext(AppContext);
+  const {
+    formData,
+    setFormData,
+    handleChange,
+    handleUserType,
+    handleSubmit,
+    signupMessage,
+    isLoading,
+  } = useContext(AppContext);
+
+  console.log("Signu Up message", signupMessage);
 
   // console.log("USERTYPE:", formData.userType);
 
@@ -158,6 +168,13 @@ const SignUpPage = () => {
                   onChange={handleChange}
                   className="w-full p-3 border border-violet-400/20 rounded-xl bg-white/5 text-white placeholder-gray-400 focus:outline-none focus:border-violet-400/40 focus:ring-1 focus:ring-violet-400/40 transition-all duration-200"
                 />
+                {/* <PhoneInput
+                    country={"us"}
+                    value={formData.phoneNumber}
+                    onChange={handleChange}
+                    className="w-full p-3 border border-violet-400/20 rounded-xl bg-white/5 text-white placeholder-gray-400 focus:outline-none focus:border-violet-400/40 focus:ring-1 focus:ring-violet-400/40 transition-all duration-200"
+                  /> */}
+
                 <input
                   type="password"
                   placeholder="Password"
@@ -244,6 +261,15 @@ const SignUpPage = () => {
             >
               {formData.userType === "Login" ? "Login" : "Sign Up"}
             </button>
+            {signupMessage ? (
+              <p className="text-green-500 mt-4">{signupMessage}</p>
+            ) : (
+              isLoading && (
+                <div className="flex justify-center mt-4">
+                  <Loader className="w-6 h-6 animate-spin" />
+                </div>
+              )
+            )}
           </form>
         </div>
       </div>

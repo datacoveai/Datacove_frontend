@@ -109,7 +109,7 @@ const DocsForClient = () => {
         />
       </div>
 
-      <div className="overflow-x-auto rounded-lg border border-violet-600 shadow-md ">
+      <div className="overflow-x-auto rounded-lg border border-violet-600/40 shadow-md ">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-purple-100">
             {table.getHeaderGroups().map((headerGroup) => (
@@ -130,7 +130,7 @@ const DocsForClient = () => {
               </tr>
             ))}
           </thead>
-          <tbody className="bg-inherit divide-y divide-gray-200 text-white">
+          <tbody className="bg-inherit divide-y divide-gray-200/20 text-white">
             {table.getRowModel().rows.length ? (
               table.getRowModel().rows.map((row) => (
                 <tr

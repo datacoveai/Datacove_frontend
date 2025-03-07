@@ -190,6 +190,7 @@ const SideBar = () => {
       {/* History Section */}
       <div className="flex flex-col gap-2 text-white/80 hover:text-white border border-white/10 p-3 rounded-lg hover:bg-white/5 transition-colors mb-[1rem]">
         {/* Header with Animated Icon */}
+
         <div
           className="flex items-center justify-between py-1 cursor-pointer"
           onClick={() => setHistoryOpen(!isHistoryOpen)}
@@ -214,14 +215,24 @@ const SideBar = () => {
           className="overflow-hidden"
         >
           {user.userType !== "client" && (
-            <div className="flex items-center gap-2 py-2 text-sm">
-              <Link
-                to={`/dashboard/${user?.name}/history/documents`}
-                className="flex items-center gap-2 "
-              >
-                <FileClock className="h-5 w-5 text-blue-600" /> Docs History
-              </Link>
-            </div>
+            <>
+              <div className="flex items-center gap-2 py-2 text-sm">
+                <Link
+                  to={`/dashboard/${user?.name}/history/documents`}
+                  className="flex items-center gap-2 "
+                >
+                  <FileClock className="h-5 w-5 text-blue-600" /> Docs History
+                </Link>
+              </div>
+              <div className="flex items-center gap-2 py-2 text-sm">
+                <Link
+                  to={`/dashboard/${user?.name}/history/shareddocs`}
+                  className="flex items-center gap-2 "
+                >
+                  <FileClock className="h-5 w-5 text-blue-600" /> Shared Docs
+                </Link>
+              </div>
+            </>
           )}
 
           <div className="flex items-center gap-2 py-2 text-sm">

@@ -8,6 +8,7 @@ import axios from "axios";
 import { AppContext } from "../../context/AppContext";
 import ClientsTable from "../Table/ClientsTable";
 import InvitationsTable from "../Table/InvitationsTable";
+import SharedBySingleUser from "../Table/SharedBySingleUser";
 const ChatWithClient = () => {
   const { user } = useAppStore();
   const { userDocs } = useContext(AppContext);
@@ -43,12 +44,12 @@ const ChatWithClient = () => {
         Client Dashboard
       </h2>
 
-      <div className="flex flex-col lg:flex-row gap-6 w-full">
+      <div className="flex flex-col lg:flex-row gap-6 w-full h-[30rem]">
         {/* Left side - Tables */}
         {user && user.userType !== "client" && (
-          <div className="w-full lg:w-full   space-y-6">
+          <div className="w-full lg:w-full  h-full  space-y-6">
             {/* Clients Table */}
-            <div className="bg-[#170C4B] rounded-2xl p-6 shadow-lg">
+            <div className="bg-[#170C4B] rounded-2xl p-6 shadow-lg h-1/2">
               <h3 className="font-[500] text-xl text-[#9DA1B3] mb-4 pb-2 border-b border-violet-500/40">
                 Your Clients
               </h3>
@@ -57,7 +58,7 @@ const ChatWithClient = () => {
             </div>
 
             {/* Invitations Table */}
-            <div className="bg-[#170C4B] rounded-2xl p-6 shadow-lg">
+            <div className="bg-[#170C4B] rounded-2xl p-6 shadow-lg h-1/2">
               <h3 className="font-[500] text-xl text-[#9DA1B3] mb-4 pb-2 border-b border-violet-500/40">
                 Pending Invitations
               </h3>
@@ -70,7 +71,7 @@ const ChatWithClient = () => {
         )}
 
         {/* Right side - Chat Box */}
-        <div className="w-full lg:w-1/2">
+        <div className="w-full lg:w-1/2 h-full">
           <div className="bg-[#170C4B] rounded-2xl p-6 shadow-lg h-full flex flex-col">
             <h3 className="font-[500] text-xl text-[#9DA1B3] mb-4 pb-2 border-b border-violet-500/40">
               Chat with Client: <span className="text-white">John Doe</span>
@@ -177,6 +178,11 @@ const ChatWithClient = () => {
           </div>
         )}
       </div>
+      {user && user.userType === "client" && (
+        <div className="flex flex-col lg:flex-row gap-6 w-full mt-[1rem]">
+          <SharedBySingleUser />
+        </div>
+      )}
     </div>
   );
 };

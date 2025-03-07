@@ -37,6 +37,7 @@ import CreateProject from "./dashboard/Projects/CreateProject";
 import SingleProject from "./dashboard/Projects/SingleProject";
 import ReportPage from "./dashboard/DashboardPages/ReportPage";
 import VerifyOtp from "./Pages/VerifyOtp";
+import SharedDocuments from "./dashboard/Table/SharedDocuments";
 
 const Home = () => {
   return (
@@ -116,6 +117,7 @@ const App = () => {
             <Route path="/dashboard/:name" element={<DashboardLayout />}>
               <Route index element={<DashBoardHome />} />
               <Route path="history/documents" element={<DocsHistory />} />
+              <Route path="history/shareddocs" element={<SharedDocuments />} />
               <Route path="history/notes" element={<NotesHistory />} />
               <Route
                 path="chat/summarizedocument"

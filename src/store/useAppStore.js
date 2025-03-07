@@ -35,15 +35,13 @@ const useAppStore = create((set) => ({
           withCredentials: true, // Include credentials for cookies
         }
       );
-      console.log(response);
+      // console.log(response);
       if (response.data.user.is_email_verified === true) {
         set({ user: response.data.user, isIndiSigningUp: false });
       }
 
       if (response.status === 201) {
-        toast.success(
-          "Account created successfully, Check mail for verfication"
-        );
+        return "Account created successfully, Check mail for verfication";
       }
     } catch (error) {
       //console.log(error)
@@ -83,7 +81,7 @@ const useAppStore = create((set) => ({
         { withCredentials: true }
       );
       if (response.status === 200) {
-        toast.success("Login Successfully");
+        toast.success(response.data.message);
       }
       set({ user: response.data.user, isLoggingIn: false });
       navigate(`/dashboard/${response.data.user.name.replace(/\s+/g, "")}`);
