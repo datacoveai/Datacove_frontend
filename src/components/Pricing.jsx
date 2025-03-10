@@ -1,13 +1,73 @@
-import React from "react";
-import Data from "../Data/PricingData";
+import React, { useState } from "react";
+import PricingData from "../Data/PricingData";
 import check from "../assets/tick.png";
 import price_icon from "../assets/price-icon.png";
 import shape from "../assets/shape.png";
 import cloud from "../assets/cloud.png";
 import hero from "../assets/hero-bg.png";
 import Footer from "../Footer/Footer";
+import PricingForm from "./PricingForm";
+import Modal from "./Modal";
+import useAppStore from "../store/useAppStore";
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
+
+const STRIPE_PUBLIC_KEY =
+  "pk_test_51QzrN1BXQcHJKkSwOVZsl5kUDFVYazrcQHwUewGnRTw19K3p5Iff2sahHkJP7Ah3Iv3rOwjDHzoyOZcEWXwoa0rg009gz6uy2a";
+const stripePromise = loadStripe(STRIPE_PUBLIC_KEY);
 
 const Pricing = () => {
+  const { user } = useAppStore();
+  const [isAnnual, setIsAnnual] = useState(false); // Track pricing type
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState(null);
+
+  const handleGetStarted = async (plan) => {
+    console.log("Plan name", plan.title);
+    if (user) {
+      const stripe = await stripePromise;
+      try {
+        const response = await axios.post(
+          `http://localhost:5000/api/v1/membership/create-checkout-session`,
+          {
+            userId: user._id,
+            planName: plan.title,
+            planId: isAnnual ? plan.annuallyPriceId : plan.monthlyPriceId,
+            action: user.membership ? "manage" : "new",
+            amount: isAnnual ? plan.annuallyPrice : plan.monthlyPrice,
+          },
+          { withCredentials: true }
+        );
+
+        const { sessionId, billingUrl } = response.data;
+        console.log("session id", sessionId);
+        console.log("billing url", billingUrl);
+
+        if (billingUrl) {
+          // Redirect to Stripe's Billing Portal if user has an active subscription
+          window.location.href = billingUrl;
+        } else if (sessionId) {
+          // Redirect to Stripe Checkout if user is purchasing a new subscription
+          const { error } = await stripe.redirectToCheckout({ sessionId });
+          if (error) {
+            console.error(error.message);
+          }
+        } else {
+          console.error("Unexpected response:", response.data);
+        }
+      } catch (error) {
+        console.error("Error creating Checkout session:", error);
+      }
+    } else {
+      setSelectedPlan({
+        title: plan.title,
+        price: isAnnual ? plan.annuallyPrice : plan.monthlyPrice,
+        plan: isAnnual ? "Yearly" : "Monthly",
+      });
+      setIsModalOpen(true);
+    }
+  };
+
   return (
     <div className="home-container">
       <img
@@ -15,6 +75,8 @@ const Pricing = () => {
         alt=""
         className="absolute top-0 left-0 w-full h-auto -z-40"
       />
+
+      {/* Title */}
       <div className="flex justify-center items-center flex-col mt-36">
         <h1 className="font-[700] text-[36px] sm:text-[48px] bg-gradient-to-b from-[#F6F6F7] to-[#7E808F] bg-clip-text text-transparent">
           Pricing
@@ -23,21 +85,33 @@ const Pricing = () => {
           Select from best plan, ensuring a perfect match. Need more or less?
           Customize your <br /> subscription for a seamless fit!
         </p>
+
+        {/* Toggle Button */}
         <div className="mt-12">
-          <div className="border border-gray-500  p-1 gap-1 flex rounded-lg bg-[#1a1e38] justify-center align-middle items-center border-opacity-10 ">
-            <div className="bg-[#7214FF]  rounded-lg p-1 pl-3 pr-3 ">
-              <button className="text-[14px]  pb-1 text-center align-middle flex justify-center">
-                Monthly
-              </button>
-            </div>
-            <div className=" p-2 rounded-lg">
-              <button className="text-[14px] pl-2 pr-2">Anually</button>
-            </div>
+          <div className="border border-gray-500 p-1 gap-1 flex rounded-lg bg-[#1a1e38] justify-center align-middle items-center border-opacity-10">
+            <button
+              className={`p-1 pl-3 pr-3 rounded-lg ${
+                !isAnnual ? "bg-[#7214FF] text-white" : "text-gray-300"
+              }`}
+              onClick={() => setIsAnnual(false)}
+            >
+              Monthly
+            </button>
+            <button
+              className={`p-1 pl-3 pr-3 rounded-lg ${
+                isAnnual ? "bg-[#7214FF] text-white" : "text-gray-300"
+              }`}
+              onClick={() => setIsAnnual(true)}
+            >
+              Annually
+            </button>
           </div>
         </div>
       </div>
+
+      {/* Membership cards */}
       <div className="flex gap-[1rem] max-lg:flex-wrap mt-8 justify-center mb-8 align-middle">
-        {Data.map((item) => (
+        {PricingData.map((item) => (
           <div
             key={item.id}
             style={{
@@ -61,39 +135,35 @@ const Pricing = () => {
             </div>
             <div>
               <h4 className=" text-[20px]">{item.title}</h4>
-
               <p className="  text-[14px] text-white text-opacity-80">
                 {item.description}
               </p>
             </div>
 
+            {/* Pricing Section */}
             <div className="flex items-center mt-4 mb-4">
-              {item.price && (
-                <>
-                  <div className="text-[38px] leading-none font-[500] font-beVietnam">
-                    {item.price.toLowerCase() === "free" ? (
-                      <>Free</>
-                    ) : (
-                      <>
-                        ${item.price}
-                        <span className="text-[12px] font-beVietnam text-[#FFFFFFCC] text-opacity-80">
-                          /per month
-                        </span>
-                      </>
-                    )}
-                  </div>
-                </>
+              {(item.monthlyPrice || item.annuallyPrice) && (
+                <div className="text-[38px] leading-none font-[500] font-beVietnam">
+                  {isAnnual
+                    ? `$${item.annuallyPrice}`
+                    : `$${item.monthlyPrice}`}
+                  <span className="text-[12px] font-beVietnam text-[#FFFFFFCC] text-opacity-80">
+                    {isAnnual ? "/per year" : "/per month"}
+                  </span>
+                </div>
               )}
             </div>
 
+            {/* Get Started Button */}
             <div
-              className="flex justify-center items-center align-middle rounded-lg border-[0.5px] border-gray-400 border-opacity-10  cursor-pointer transition duration-300 ease-in-out"
+              className="flex justify-center items-center align-middle rounded-lg border-[0.5px] border-gray-400 border-opacity-10 cursor-pointer transition duration-300 ease-in-out"
               style={{
                 background:
                   "linear-gradient(195.05deg, rgba(163, 43, 255, 0.1) 0%, rgba(248, 43, 255, 0.02) 50%, rgba(153, 43, 255, 0.06) 100%)",
               }}
+              onClick={() => handleGetStarted(item)}
             >
-              <button className="text-center p-2  transition duration-300 ease-in-out w-full hover:bg-[#7214FF] rounded-lg">
+              <button className="text-center p-2 transition duration-300 ease-in-out w-full hover:bg-[#7214FF] rounded-lg">
                 Get Started
               </button>
             </div>
@@ -115,6 +185,18 @@ const Pricing = () => {
           </div>
         ))}
       </div>
+      {!user && (
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          {selectedPlan && (
+            <PricingForm
+              selectedPlan={selectedPlan}
+              onClose={() => setIsModalOpen(false)}
+            />
+          )}
+        </Modal>
+      )}
+
+      {/* Customised Pricing Section */}
       <div className="flex justify-center items-center mb-24">
         <div className="mt-12 md:mt-24 flex flex-col justify-center items-center w-full md:w-[80%]">
           <div
@@ -153,5 +235,3 @@ const Pricing = () => {
 };
 
 export default Pricing;
-
-// #1a1e38

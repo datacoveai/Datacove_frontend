@@ -38,6 +38,8 @@ import SingleProject from "./dashboard/Projects/SingleProject";
 import ReportPage from "./dashboard/DashboardPages/ReportPage";
 import VerifyOtp from "./Pages/VerifyOtp";
 import SharedDocuments from "./dashboard/Table/SharedDocuments";
+import AcceptClientInvitation from "./dashboard/DashboardPages/AcceptClientInvitation";
+import Success from "./components/Success";
 
 const Home = () => {
   return (
@@ -110,6 +112,11 @@ const App = () => {
           <Route path="/forgetpassword" element={<ForgetPassword />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/join" element={<AcceptInvitation />} />
+          <Route path="/subscription-success" element={<Success />} />
+          <Route
+            path="/accept-invitation"
+            element={<AcceptClientInvitation />}
+          />
           <Route path="/verify-email" element={<VerifyOtp />} />
 
           {/* Protected Route for Dashboard */}

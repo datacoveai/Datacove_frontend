@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import logo from "../assets/logo.png";
-import { Plus, X } from "lucide-react";
+import { ArrowLeft, Plus, X } from "lucide-react";
 import { Search } from "lucide-react";
 
 import useAppStore from "../store/useAppStore";
@@ -81,8 +81,15 @@ const SideBar = () => {
   return (
     <div className="w-[22rem] fixed top-0 left-0 h-screen bg-[#1A114A] p-4 flex flex-col">
       {/* Logo */}
-      <div className="bg-gradient-to-b from-[#F6F6F7] to-[#7E808F] bg-clip-text text-transparent font-bold text-2xl mb-8">
-        <Link to={`/dashboard/${user.name}`}>DATACOVE AI</Link>
+      <div className="mb-8 gap-2">
+        <div className="bg-gradient-to-b from-[#F6F6F7] to-[#7E808F] bg-clip-text text-transparent font-bold text-2xl ">
+          <Link to={`/dashboard/${user.name}`}>DATACOVE AI</Link>
+        </div>
+
+        <div className="text-sm flex items-center underline underline-offset-2 text-blue-600">
+          <ArrowLeft Icon className="w-4 h-4 mr-2" />
+          <Link to={`/`}>back to website</Link>
+        </div>
       </div>
 
       {/* Action Buttons */}
